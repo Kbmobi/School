@@ -1,0 +1,272 @@
+* Introduction
+Lab Number: 7
+Program Name if applicable: Lab7
+Author name and email addres: Keegan Bailey, kbailey.v@gmail.com
+Date of submission: 2/22/2013
+Time estimated to complete the lab: 8 hour
+Actual time taken to complete the lab: over 20 hours 
+A description of the program: Use objects to create and manipulate images.		
+required to run the program if applicable: lab7.html, main.php, Shape.php, Square.php, Triangle.php, Circle.php 
+
+** Psuedocode
+#+begin_src python
+Create a class driver to control drawing the images on the screen
+Create a html to display the images from the driver.
+Create a main class to control the new objects,
+    - The drawing on the canvas,
+    - resizing of other objects, 
+    - moving objects around canvas
+Create 3 extended classes, to control shaped
+    - Square, Triangle, Circle to just draw the shapes on the canvas.
+Add checks for all input 
+    - If any parameters are out of bounds, set them to 0. 
+#+end_src
+http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab7/lab7.html
+
+*** lab7.html
+#+begin_src html
+<html>
+  <head><title>Lab 7 Images</title></head>
+  <body>
+    <h1>lab 7 -- Keegan Bailey</h1>
+    <a href="index.html">Return to main page.</a>
+    <hr>
+	<h1>The Square</h1>
+    <img src="main.php?x=1">
+	<h1>The Circle</h1>
+    <img src="main.php?x=2">
+	<h1>The Triangle</h1>
+    <img src="main.php?x=3">
+    </body>
+</html>
+#+end_src
+
+*** main.php
+#+begin_src php
+<?php
+include('./Square.php');
+include('./Circle.php');
+include('./Triangle.php');
+
+
+if($_GET['x'] == 1) {
+	//Draw a square
+	$test = new Square(300, 50, 100, 100);
+	$test->draw();
+	$test->makeSmaller(25);
+	$test->moveUp(25);
+	$test->moveLeft(30);
+	$test->draw();
+	$test->moveUp(5);
+	$test->moveLeft(5);
+	$test->makeBigger(65);
+	$test->draw();
+	$test->disp();
+}
+
+elseif($_GET["x"] == 2) {
+	//Draw a Circle
+	$test2 = new Circle(300, 50, 100, 100);
+	$test2->draw();
+	$test2->makeSmaller(10);
+	$test2->moveRight(50);
+	$test2->draw();
+	$test2->makeBigger(20);
+	$test2->moveDown(50);
+	$test2->moveLeft(30);
+	$test2->draw();
+	$test2->disp();
+}
+
+elseif($_GET["x"] == 3) {
+	//Draw a triangle
+	$test3 = new Triangle(300, 50, 100, 100);
+	$test3->draw();
+	$test3->moveLeft(10);
+	$test3->moveUp(20);
+	$test3->makeBigger(150);
+	$test3->draw();
+	$test3->makeSmaller(125);
+	$test3->moveDown(95);
+	$test3->moveRight(75);	
+	$test3->draw();
+	$test3->disp();
+}
+
+?>
+#+end_src
+
+*** Shape.php
+#+begin_src php
+<?php
+class Shape { 
+	protected $canvasSize;
+	protected $shapeSize;
+	protected $x;
+	protected $y;
+
+	public function __construct($inCanvasSize, $inShapeSize, $inX, $inY) {
+		//clean variables
+		$inCanvasSize = htmlspecialchars(strip_tags(trim($inCanvasSize)), ENT_QUOTES);
+		$inShapeSize = htmlspecialchars(strip_tags(trim($inShapeSize)), ENT_QUOTES);
+		$inX = htmlspecialchars(strip_tags(trim($inX)), ENT_QUOTES);
+		$inY = htmlspecialchars(strip_tags(trim($inY)), ENT_QUOTES);
+		
+		//set vars
+		$this->canvasSize = $inCanvasSize;
+		$this->shapeSize = $inShapeSize;
+		$this->x = $inX;
+		$this->y = $inY;
+		
+		//Start creating colors an the canvas
+		$this->canvas = imagecreatetruecolor($this->canvasSize, $this->canvasSize) or die('Cannot Initialize new GD image stream'); 
+		$this->fg = imagecolorallocate($this->canvas, 255, 255, 255);
+		$this->bg = imagecolorallocate($this->canvas, 0,0,0);
+		$this->fill = imagefill($this->canvas, 0, 0, $this->bg);
+	}
+	
+	public function __destruct() { 
+		if(isset($this->canvas)) { 
+			imagedestroy($this->canvas); 
+		}	 
+	}	
+
+	public function disp() {
+		header ('Content-type: image/png');
+		imagepng($this->canvas);
+	}
+
+        //**********************************
+	//Functions to move and resize image
+        //**********************************
+	
+	public function makeBigger ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+		
+		//get test data
+		$iTest1 = $i + $this->x;
+		$iTest2 = $i + $this->y;
+
+		//check to see if input amount is no good
+		if($i <= 0  || $iTest1 > $this->canvas || $iTest2 > $this->canvas){
+			$i == 0;
+		}	   	
+		
+		//increase size
+		$this->shapeSize += $i;
+	}
+
+	public function makeSmaller ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+
+		//test data
+		$iTest1 = $this->shapeSize - $i;
+
+		//check to see if input amount is no good
+		if($i <= 0 || $iTest1 <= 0) {
+			$i == 0;
+		}	
+  
+		$this->shapeSize -= $i;
+	}
+
+	public function moveUp ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+		
+		//test data
+		$iTest1 = $this->y - $i;
+
+		if($i <= 0|| $iTest1 <= 0) {
+			$i == 0;
+		}
+		
+		$this->y -= $i;
+	}
+
+	public function moveRight ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+		
+		$iTest1 = $this->x + $i + $this->shapeSize;
+		
+		if($i <= 0 || $iTest1 >= $this->canvas) {
+			$i == 0;
+		}
+	
+		$this->x += $i;
+	}
+
+	public function moveDown ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+	
+		//test data
+		$iTest1 = $this->y + $this->shapeSize + $i;
+
+		if($i <= 0|| $iTest1 >= $this->canvas) {
+			$i == 0;
+		}
+		
+		$this->y += $i;
+	}
+
+	public function moveLeft ($di) {
+		$i = htmlspecialchars(strip_tags(trim($di)), ENT_QUOTES);
+
+		//test data
+		$iTest1 = $this->x - $i;
+		
+		if($i <= 0 || $iTest1 >= 0) {
+			$i == 0;
+		}
+	
+		$this->x -= $i;
+	}
+
+
+}
+?>
+#+end_src
+*** Square.php
+#+begin_src php
+<?php
+include_once('Shape.php');
+
+class Square extends Shape {
+
+	public function draw () {
+		imagerectangle($this->canvas, $this->x, $this->y, 
+						$this->x + $this->shapeSize, $this->y + $this->shapeSize, 
+						$this->fg);
+	}
+
+}
+?>
+#+end_src
+*** Triangle.php
+#+begin_src php
+<?php
+include_once('Shape.php');
+
+class Triangle extends Shape {
+
+	public function draw () {
+		$arrayForTrianglePoints = array($this->x, $this->y, $this->x, $this->x + $this->shapeSize, $this->x + $this->shapeSize, $this->y + $this->shapeSize);
+		imagepolygon($this->canvas, $arrayForTrianglePoints, 3, $this->fg);
+	}
+
+}
+?>
+#+end_src
+*** Circle.php
+#+begin_src php
+<?php
+include_once('Shape.php');
+
+class Circle extends Shape {
+
+	public function draw () {
+		imageellipse($this->canvas, $this->x, $this->y, $this->shapeSize, $this->shapeSize, $this->fg);
+	}
+
+}
+?>
+#+end_src

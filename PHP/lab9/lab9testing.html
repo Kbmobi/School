@@ -1,0 +1,74 @@
+<html>
+<head>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+        //Get the submit button to send over the inputs
+        $(document).ready(function(){
+             $("#btn").click(function(){
+                 $('html, body').animate({
+                     scrollTop: $('#bar').offset().top
+                 }, 9000);
+             $("#bar").load("testing.php", {'foo':$('#foo').val()});
+            });
+        });
+    </script>
+    <style>
+        button.css3button {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: #000000;
+            padding: 10px 20px;
+            background: -moz-linear-gradient(
+                top,
+                #d95c43 0%,
+                #d95c43);
+            background: -webkit-gradient(
+                linear, left top, left bottom,
+                from(#d95c43),
+                to(#d95c43));
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            border: 1px solid #d95c43;
+            -moz-box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            -webkit-box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            text-shadow:
+                0px -1px 0px rgba(000,000,000,0.7),
+                0px 1px 0px rgba(255,255,255,0.3);
+        }
+
+        body {
+            background-color:#ECD078;
+        }
+
+        form input[type=text], form input[type=password], form select, form textarea {
+            width: 100%;
+            border: 0;
+            padding: 0.75em;
+            font-size: 1em;
+            border-radius: 8px;
+            background: #282828;
+            color: #bbb;
+            box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.05), 0px 1px 0px 0px rgba(255,255,255,0.025);
+        }
+    </style>
+</head>
+
+<body>
+
+<form>
+    <input type = 'text' id = 'foo'/>
+    <button type="button" id="btn" name="submit" class="css3button">submit</button>
+</form>
+
+<div id="bar"></div>
+
+</body>
+</html>

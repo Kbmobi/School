@@ -1,0 +1,4 @@
+Create an html forum that links to id's for value.
+	- Make a JS function to send values to a php.
+Have php input check, and return a formated table.
+Display the table on the origional html. 

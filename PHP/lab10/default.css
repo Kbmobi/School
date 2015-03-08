@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+body {background-color:white;}
+h1 {color:black;}
+h2 {color:black;}
+h3 {color:black;}
+p + #one {color:black;}
+p + #two {color:black;}
+p + #three {color:black;}

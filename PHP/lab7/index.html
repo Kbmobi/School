@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>test</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="test"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-02-22T18:25-0800"/>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Lab 7</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Psuedocode</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 lab7.html</a></li>
+<li><a href="#sec-1-1-2">1.1.2 main.php</a></li>
+<li><a href="#sec-1-1-3">1.1.3 Shape.php</a></li>
+<li><a href="#sec-1-1-4">1.1.4 Square.php</a></li>
+<li><a href="#sec-1-1-5">1.1.5 Triangle.php</a></li>
+<li><a href="#sec-1-1-6">1.1.6 Circle.php</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>Lab Number: 7</p>
+<p>Program Name if applicable: Lab7</p>
+<p>Author name and email addres: Keegan Bailey, kbailey.v@gmail.com</p>
+<p>Date of submission: 2/22/2013</p>
+<p>Time estimated to complete the lab: 8 hour</p>
+<p>Actual time taken to complete the lab: over 20 hours </p>
+<p>A description of the program: Use objects to create and manipulate images.</p>
+<p>required to run the program if applicable: lab7.html, main.php, Shape.php, Square.php, Triangle.php, Circle.php</p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab7/lab7.html">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab7/lab7.html</a>
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Psuedocode</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+
+
+<pre class="src src-python">Create a <span style="color: #859900;">class</span> <span style="color: #b58900;">driver</span> to control drawing the images on the screen
+Create a html to display the images <span style="color: #859900;">from</span> the driver.
+Create a main <span style="color: #859900;">class</span> <span style="color: #b58900;">to</span> control the new objects,
+    - The drawing on the canvas,
+    - resizing of other objects, 
+    - moving objects around canvas
+Create 3 extended classes, to control shaped
+    - Square, Triangle, Circle to just draw the shapes on the canvas.
+Add checks <span style="color: #859900;">for</span> <span style="color: #859900;">all</span> input 
+    - If <span style="color: #859900;">any</span> parameters are out of bounds, <span style="color: #859900;">set</span> them to 0. 
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> lab7.html</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+
+
+<pre class="src src-html">&lt;<span style="color: #268bd2;">html</span>&gt;
+  &lt;<span style="color: #268bd2;">head</span>&gt;&lt;<span style="color: #268bd2;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Lab 7 Images</span>&lt;/<span style="color: #268bd2;">title</span>&gt;&lt;/<span style="color: #268bd2;">head</span>&gt;
+  &lt;<span style="color: #268bd2;">body</span>&gt;
+    &lt;<span style="color: #268bd2;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">lab 7 -- Keegan Bailey</span>&lt;/<span style="color: #268bd2;">h1</span>&gt;
+    &lt;<span style="color: #268bd2;">a</span> <span style="color: #268bd2;">href</span>=<span style="color: #2aa198;">"index.html"</span>&gt;Return to main page.&lt;/<span style="color: #268bd2;">a</span>&gt;
+    &lt;<span style="color: #268bd2;">hr</span>&gt;
+        &lt;<span style="color: #268bd2;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">The Square</span>&lt;/<span style="color: #268bd2;">h1</span>&gt;
+    &lt;<span style="color: #268bd2;">img</span> <span style="color: #268bd2;">src</span>=<span style="color: #2aa198;">"main.php?x=1"</span>&gt;
+        &lt;<span style="color: #268bd2;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">The Circle</span>&lt;/<span style="color: #268bd2;">h1</span>&gt;
+    &lt;<span style="color: #268bd2;">img</span> <span style="color: #268bd2;">src</span>=<span style="color: #2aa198;">"main.php?x=2"</span>&gt;
+        &lt;<span style="color: #268bd2;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">The Triangle</span>&lt;/<span style="color: #268bd2;">h1</span>&gt;
+    &lt;<span style="color: #268bd2;">img</span> <span style="color: #268bd2;">src</span>=<span style="color: #2aa198;">"main.php?x=3"</span>&gt;
+    &lt;/<span style="color: #268bd2;">body</span>&gt;
+&lt;/<span style="color: #268bd2;">html</span>&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> main.php</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+
+
+<pre class="src src-php"><span style="color: #cb4b16;">&lt;?php</span>
+<span style="color: #859900;">include</span>(<span style="color: #2aa198;">'./Square.php'</span>);
+<span style="color: #859900;">include</span>(<span style="color: #2aa198;">'./Circle.php'</span>);
+<span style="color: #859900;">include</span>(<span style="color: #2aa198;">'./Triangle.php'</span>);
+
+
+<span style="color: #859900;">if</span>($<span style="color: #2aa198;">_GET</span>[<span style="color: #2aa198;">'x'</span>] == <span style="color: #839496; background-color: #002b36;">1</span>) {
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">Draw a square</span>
+        $<span style="color: #268bd2;">test</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Square</span>(<span style="color: #839496; background-color: #002b36;">300</span>, <span style="color: #839496; background-color: #002b36;">50</span>, <span style="color: #839496; background-color: #002b36;">100</span>, <span style="color: #839496; background-color: #002b36;">100</span>);
+        $<span style="color: #268bd2;">test</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeSmaller</span>(<span style="color: #839496; background-color: #002b36;">25</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveUp</span>(<span style="color: #839496; background-color: #002b36;">25</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveLeft</span>(<span style="color: #839496; background-color: #002b36;">30</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveUp</span>(<span style="color: #839496; background-color: #002b36;">5</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveLeft</span>(<span style="color: #839496; background-color: #002b36;">5</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeBigger</span>(<span style="color: #839496; background-color: #002b36;">65</span>);
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test</span>-&gt;<span style="color: #839496; background-color: #002b36;">disp</span>();
+}
+
+<span style="color: #859900;">elseif</span>($<span style="color: #2aa198;">_GET</span>[<span style="color: #2aa198;">"x"</span>] == <span style="color: #839496; background-color: #002b36;">2</span>) {
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">Draw a Circle</span>
+        $<span style="color: #268bd2;">test2</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Circle</span>(<span style="color: #839496; background-color: #002b36;">300</span>, <span style="color: #839496; background-color: #002b36;">50</span>, <span style="color: #839496; background-color: #002b36;">100</span>, <span style="color: #839496; background-color: #002b36;">100</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeSmaller</span>(<span style="color: #839496; background-color: #002b36;">10</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveRight</span>(<span style="color: #839496; background-color: #002b36;">50</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeBigger</span>(<span style="color: #839496; background-color: #002b36;">20</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveDown</span>(<span style="color: #839496; background-color: #002b36;">50</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveLeft</span>(<span style="color: #839496; background-color: #002b36;">30</span>);
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test2</span>-&gt;<span style="color: #839496; background-color: #002b36;">disp</span>();
+}
+
+<span style="color: #859900;">elseif</span>($<span style="color: #2aa198;">_GET</span>[<span style="color: #2aa198;">"x"</span>] == <span style="color: #839496; background-color: #002b36;">3</span>) {
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">Draw a triangle</span>
+        $<span style="color: #268bd2;">test3</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Triangle</span>(<span style="color: #839496; background-color: #002b36;">300</span>, <span style="color: #839496; background-color: #002b36;">50</span>, <span style="color: #839496; background-color: #002b36;">100</span>, <span style="color: #839496; background-color: #002b36;">100</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveLeft</span>(<span style="color: #839496; background-color: #002b36;">10</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveUp</span>(<span style="color: #839496; background-color: #002b36;">20</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeBigger</span>(<span style="color: #839496; background-color: #002b36;">150</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">makeSmaller</span>(<span style="color: #839496; background-color: #002b36;">125</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveDown</span>(<span style="color: #839496; background-color: #002b36;">95</span>);
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">moveRight</span>(<span style="color: #839496; background-color: #002b36;">75</span>);  
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">draw</span>();
+        $<span style="color: #268bd2;">test3</span>-&gt;<span style="color: #839496; background-color: #002b36;">disp</span>();
+}
+
+<span style="color: #cb4b16;">?&gt;</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Shape.php</h4>
+<div class="outline-text-4" id="text-1-1-3">
+
+
+
+
+<pre class="src src-php"><span style="color: #cb4b16;">&lt;?php</span>
+<span style="color: #859900;">class</span> <span style="color: #b58900;">Shape</span> { 
+        <span style="color: #859900;">protected</span> $<span style="color: #268bd2;">canvasSize</span>;
+        <span style="color: #859900;">protected</span> $<span style="color: #268bd2;">shapeSize</span>;
+        <span style="color: #859900;">protected</span> $<span style="color: #268bd2;">x</span>;
+        <span style="color: #859900;">protected</span> $<span style="color: #268bd2;">y</span>;
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">__construct</span>($<span style="color: #268bd2;">inCanvasSize</span>, $<span style="color: #268bd2;">inShapeSize</span>, $<span style="color: #268bd2;">inX</span>, $<span style="color: #268bd2;">inY</span>) {
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">clean variables</span>
+                $<span style="color: #268bd2;">inCanvasSize</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">inCanvasSize</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+                $<span style="color: #268bd2;">inShapeSize</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">inShapeSize</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+                $<span style="color: #268bd2;">inX</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">inX</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+                $<span style="color: #268bd2;">inY</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">inY</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">set vars</span>
+                $<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">canvasSize</span> = $<span style="color: #268bd2;">inCanvasSize</span>;
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span> = $<span style="color: #268bd2;">inShapeSize</span>;
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> = $<span style="color: #268bd2;">inX</span>;
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> = $<span style="color: #268bd2;">inY</span>;
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">Start creating colors an the canvas</span>
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span> = <span style="color: #839496; background-color: #002b36;">imagecreatetruecolor(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvasSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvasSize</span>) <span style="color: #859900;">or</span> <span style="color: #839496; background-color: #002b36;">die(</span><span style="color: #2aa198;">'Cannot Initialize new GD image stream'</span>); 
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">fg</span> = <span style="color: #839496; background-color: #002b36;">imagecolorallocate(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>, <span style="color: #839496; background-color: #002b36;">255</span>, <span style="color: #839496; background-color: #002b36;">255</span>, <span style="color: #839496; background-color: #002b36;">255</span>);
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">bg</span> = <span style="color: #839496; background-color: #002b36;">imagecolorallocate(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>, <span style="color: #839496; background-color: #002b36;">0</span>,<span style="color: #839496; background-color: #002b36;">0</span>,<span style="color: #839496; background-color: #002b36;">0</span>);
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">fill</span> = <span style="color: #839496; background-color: #002b36;">imagefill(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>, <span style="color: #839496; background-color: #002b36;">0</span>, <span style="color: #839496; background-color: #002b36;">0</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">bg</span>);
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">__destruct</span>() { 
+                <span style="color: #859900;">if</span>(<span style="color: #839496; background-color: #002b36;">isset(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>)) { 
+                        <span style="color: #839496; background-color: #002b36;">imagedestroy(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>); 
+                }        
+        }       
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">disp</span>() {
+                <span style="color: #839496; background-color: #002b36;">header (</span><span style="color: #2aa198;">'Content-type: image/png'</span>);
+                <span style="color: #839496; background-color: #002b36;">imagepng(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>);
+        }
+
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">**********************************</span>
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">Functions to move and resize image</span>
+        <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">**********************************</span>
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">makeBigger</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">get test data</span>
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #268bd2;">i</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span>;
+                $<span style="color: #268bd2;">iTest2</span> = $<span style="color: #268bd2;">i</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span>;
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">check to see if input amount is no good</span>
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span>  || $<span style="color: #268bd2;">iTest1</span> <span style="color: #2aa198;">&gt;</span> $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span> || $<span style="color: #268bd2;">iTest2</span> &gt; $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>){
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }               
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">increase size</span>
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span> += $<span style="color: #268bd2;">i</span>;
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">makeSmaller</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">test data</span>
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span> - $<span style="color: #268bd2;">i</span>;
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">check to see if input amount is no good</span>
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span> || $<span style="color: #268bd2;">iTest1</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span>) {
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }       
+
+                $<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">shapeSize</span> -= $<span style="color: #268bd2;">i</span>;
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">moveUp</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">test data</span>
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> - $<span style="color: #268bd2;">i</span>;
+
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span>|| $<span style="color: #268bd2;">iTest1</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span>) {
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }
+
+                $<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">y</span> -= $<span style="color: #268bd2;">i</span>;
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">moveRight</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> + $<span style="color: #268bd2;">i</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>;
+
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span> || $<span style="color: #268bd2;">iTest1</span> <span style="color: #2aa198;">&gt;</span>= $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>) {
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }
+
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> += $<span style="color: #268bd2;">i</span>;
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">moveDown</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">test data</span>
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span> + $<span style="color: #268bd2;">i</span>;
+
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span>|| $<span style="color: #268bd2;">iTest1</span> <span style="color: #2aa198;">&gt;</span>= $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>) {
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }
+
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> += $<span style="color: #268bd2;">i</span>;
+        }
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">moveLeft</span> ($<span style="color: #268bd2;">di</span>) {
+                $<span style="color: #268bd2;">i</span> = <span style="color: #839496; background-color: #002b36;">htmlspecialchars(strip_tags(trim(</span>$<span style="color: #268bd2;">di</span>)), <span style="color: #2aa198;">ENT_QUOTES</span>);
+
+                <span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">test data</span>
+                $<span style="color: #268bd2;">iTest1</span> = $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> - $<span style="color: #268bd2;">i</span>;
+
+                <span style="color: #859900;">if</span>($<span style="color: #268bd2;">i</span> &lt;= <span style="color: #839496; background-color: #002b36;">0</span> || $<span style="color: #268bd2;">iTest1</span> <span style="color: #2aa198;">&gt;</span>= <span style="color: #839496; background-color: #002b36;">0</span>) {
+                        $<span style="color: #268bd2;">i</span> == <span style="color: #839496; background-color: #002b36;">0</span>;
+                }
+
+                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> -= $<span style="color: #268bd2;">i</span>;
+        }
+
+
+}
+<span style="color: #cb4b16;">?&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Square.php</h4>
+<div class="outline-text-4" id="text-1-1-4">
+
+
+
+
+<pre class="src src-php"><span style="color: #cb4b16;">&lt;?php</span>
+<span style="color: #859900;">include_once</span>(<span style="color: #2aa198;">'Shape.php'</span>);
+
+<span style="color: #859900;">class</span> <span style="color: #b58900;">Square</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">Shape</span> {
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">draw</span> () {
+                <span style="color: #839496; background-color: #002b36;">imagerectangle(</span>$<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">canvas</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span>, 
+                                                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, 
+                                                $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">fg</span>);
+        }
+
+}
+<span style="color: #cb4b16;">?&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Triangle.php</h4>
+<div class="outline-text-4" id="text-1-1-5">
+
+
+
+
+<pre class="src src-php"><span style="color: #cb4b16;">&lt;?php</span>
+<span style="color: #859900;">include_once</span>(<span style="color: #2aa198;">'Shape.php'</span>);
+
+<span style="color: #859900;">class</span> <span style="color: #b58900;">Triangle</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">Shape</span> {
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">draw</span> () {
+                $<span style="color: #268bd2;">arrayForTrianglePoints</span> = <span style="color: #839496; background-color: #002b36;">array(</span>$<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">x</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span> + $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>);
+                <span style="color: #839496; background-color: #002b36;">imagepolygon(</span>$<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">canvas</span>, $<span style="color: #268bd2;">arrayForTrianglePoints</span>, <span style="color: #839496; background-color: #002b36;">3</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">fg</span>);
+        }
+
+}
+<span style="color: #cb4b16;">?&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Circle.php</h4>
+<div class="outline-text-4" id="text-1-1-6">
+
+
+
+
+<pre class="src src-php"><span style="color: #cb4b16;">&lt;?php</span>
+<span style="color: #859900;">include_once</span>(<span style="color: #2aa198;">'Shape.php'</span>);
+
+<span style="color: #859900;">class</span> <span style="color: #b58900;">Circle</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">Shape</span> {
+
+        <span style="color: #859900;">public</span> <span style="color: #859900;">function</span> <span style="color: #268bd2;">draw</span> () {
+                <span style="color: #839496; background-color: #002b36;">imageellipse(</span>$<span style="color: #2aa198;">this</span>-<span style="color: #2aa198;">&gt;</span><span style="color: #268bd2;">canvas</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">x</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">y</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">shapeSize</span>, $<span style="color: #2aa198;">this</span>-&gt;<span style="color: #268bd2;">fg</span>);
+        }
+
+}
+<span style="color: #cb4b16;">?&gt;</span>
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-02-22T18:25-0800</p>
+<p class="author">Author: Keegan Bailey</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3e with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

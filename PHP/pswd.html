@@ -1,0 +1,29 @@
+<html>
+<head><title>password check</title></head>
+<body>
+<h1>Password complexity check</h1>
+<p>Tests if the input consists at least 6 characters</p>
+<p>The input must contain at least 1 upper case, 1 lower case and 1 number.</p>
+<p><code>'\A(?=[-_a-zA-Z0-9]*?[A-Z])(?=[-_a-zA-Z0-9]*?[a-z])(?=[-_a-zA-Z0-9]*?[0-9])\S{6,}\z'</code></p>
+
+<form method="post" action="pswd.php">
+	<fieldset>
+	<legend>type in a password</legend>
+	<input type="password"  name="pswd"  style="width:750px; height:40px; 
+							background-color:black; color:lime; 
+									
+							-webkit-border-radius:5px;
+							-moz-border-radius:5px;
+							-o-border-radius:5px;
+							-ms-border-radius:5px;
+							border-radius:5px;
+									
+							-moz-transition:padding .25s;
+							-webkit-transition:padding .25s;
+							-o-transition:padding .25s;
+							transition:padding .25s;}" type="text" required/><input value="Check Password" type="submit" />
+			</fieldset></form>
+			<hr>
+			Keegan Bailey
+</body>
+</html>

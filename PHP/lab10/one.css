@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+body {background-color:red;}
+h1 {color:white;}
+h2 {color:white;text-decoration:blink;}
+h3 {color:white;text-decoration:blink;}
+#one {color:white; text-align:center; text-decoration:blink;}
+#two {color:white; text-align:center; text-decoration:blink;}
+#three {color:white; text-align:center; text-decoration:blink;}

@@ -1,0 +1,62 @@
+; Comp 183 -- Lab 2
+; Keegan Bailey
+; C0369801
+;
+;You are to write a small CHASM program which will:
+;
+;1. prompt the user for a string of up to 80 characters
+;2. input the string
+;3. exit if the input consists merely of the CR (carriage return) character
+;4. print the string backwards
+;5. repeat steps 1 to 4 until the lonely CR is entered.
+;
+
+	program lab2
+	include System
+	include Chars
+
+MAXLINE EQU 80		;Assigns 80 to max line
+NUL	EQU 0			;Equates NUL to 0 (which it already is for default)
+KILL	EQU 0xffff		;Ends the program, so it doesn't fall off the word.
+	STACK -1		;Stacks don't matter in craps because it's an emulator.
+	
+	DATA
+buffer	db    MAXLINE+1,?,[?] * MAXLINE+1    		   ;Magic happens here
+prompt	db    'Enter Something Here! (MAX 80 CHARS): ', NUL ;Displays text on scree and waits for user input.
+	CODE
+
+lab2
+Top
+	mov   PUTSTR,r1 	;get
+	lea   prompt,r2	;    user
+	sys   CONSOLE 	;        input
+	mov   GETSTR,r1      ;get user input and loads it into r1
+	lea   buffer,r2	;loads address of buffer
+	sys   CONSOLE	       ;get input string
+	lodbu buffer+1,,r3	;get msg length
+	cmp   r3,0		;is it empty?
+	be    runAway		;yes - we're done
+	lea   buffer + 2,r4  ;Puts the first character in r4
+	add   r4,r3,r4	;Add r4 to r3 and put it back in r4
+	dec   r4		;decreases r4
+
+nextChar
+	cmp   r3,0		;checks to see if you're done
+	be    done		;breaks to done if you're done
+	mov   PUTCHAR,r1	;puts putchar in r1
+	lodbl 0,R4,R2 	;adds nul to r4 and puts it in r2
+	sys   CONSOLE 	;prints that char
+	dec   r4	  	;decrese r4
+	dec   r3 	  	;decrese r3
+	br    nextChar	;branches back to the top of nextChar
+
+done
+	mov   CR, r2		;move cursor
+	sys   CONSOLE		;   to
+	mov   LF, r2		;    next
+	sys   CONSOLE		;     line
+	br    Top		; go get another string
+
+runAway
+	sys   KILL		;Kills that bitch with some 0xffff action
+	END

@@ -1,0 +1,126 @@
+<html>
+<head><title>Lab 2</title></head>
+<body>
+<p style="white-space:pre-wrap;">Lab Number -- 6
+Program Name if applicable -- Lab6
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 2 / 15 / 2013
+Time estimated to complete the lab - 1 hour
+Actual time taken to complete the lab - 4ish hours 
+			(would have been 20 minutes if I didn't waste time trying to find out how include worked)
+A description of the program - Draws images using user created functions.		
+required to run the program if applicable: 	lab6-1.html, image.php</p>
+<h1>Lab2 - Part 1</h1>
+
+<p style="font-weight:bold;">Psudocode:</p>
+
+<p style="white-space:pre-wrap;">
+	Create function to make images
+		- Square
+		- Triangle
+		- Circle
+	Fill im parameters for images
+	Use $_GET to pick what images to display
+</p>
+<br>
+<p style="font-weight:bold;">Source Code:</p>
+<textarea rows="30" cols="100"><?php 
+// calls to print off images. 
+if($_GET["i"] == 1){
+  square(110, 255, 0, 0);
+}
+
+elseif($_GET["i"] == 2){
+  square(50, 255, 255, 0);
+  }
+
+elseif($_GET["i"] == 3){
+  triangle(300, 0, 255, 255);
+  }
+
+elseif($_GET["i"] == 4){
+  triangle(150, 0, 255, 0);
+  }
+
+elseif($_GET["i"] == 5){
+  circle(400, 200, 255, 0, 0);
+  }
+
+elseif($_GET["i"] == 6){
+  circle(200, 100, 0, 0, 255);
+  }
+
+
+//Functions start here
+
+function square ($size, $r, $g, $b) {
+  // Output the header telling the browser this is a png image.
+  header ('Content-type: image/png');
+
+  // create the empty image.
+  $im = imagecreatetruecolor($size, $size) or die('Cannot Initialize new GD image stream');
+
+  /* Define the foreground and background colours and fill the image with the bacground colour.
+     The foreground colour is passed as a parameter, the background colour is white */
+  $fgcolor = imagecolorallocate($im, $r, $g, $b);
+  $bgcolor = imagecolorallocate($im, 255,255,255);
+  imagefill($im, 0, 0, $bgcolor); 
+
+  // Draw a rectangle. The upper left coordinate is 0,0. The lower right is size-1, size-1 since we started counting at 0. 
+  imagerectangle($im, 0, 0, $size-1, $size-1, $fgcolor);
+
+  /* Write the image to standard out - in the case of the web server to the network to the browser
+     and free up any memory used by the image */
+  imagepng($im);
+  imagedestroy($im);  
+}
+
+function triangle($size, $r, $g, $b){
+  // Output the header telling the browser this is a png image.
+  header ('Content-type: image/png');
+
+  // create the empty image.
+  $im = imagecreatetruecolor($size, $size) or die('Cannot Initialize new GD image stream');
+
+  /* Define the foreground and background colours and fill the image with the bacground colour.
+     The foreground colour is passed as a parameter, the background colour is white */
+  $fgcolor = imagecolorallocate($im, $r, $g, $b);
+  $bgcolor = imagecolorallocate($im, 255,255,255);
+  imagefill($im, 0, 0, $bgcolor); 
+
+  // Draw a triangle.  
+  imagepolygon($im, array(($size / 2), 1, 1, $size-1, $size-1, $size-1), 3, $fgcolor);
+
+  /* Write the image to standard out - in the case of the web server to the network to the browser
+     and free up any memory used by the image */
+  imagepng($im);
+  imagedestroy($im);  
+}
+
+function circle($size, $circ, $r, $g, $b){
+  // Create a blank image.
+  $image = imagecreatetruecolor($size, $size);
+
+  // Select the background color.
+  $bg = imagecolorallocate($image, 0, 0, 0);
+
+  // Fill the background with the color selected above.
+  imagefill($image, 0, 0, $bg);
+
+  // Choose a color for the ellipse.
+  $col_ellipse = imagecolorallocate($image, $r, $g, $b);
+
+  // Draw the ellipse.
+  imageellipse($image, ($size/2), ($size/2), $circ, $circ, $col_ellipse);
+
+  // Output the image.
+  header("Content-type: image/png");
+  imagepng($image);
+}
+
+?></textarea>
+
+<p style="font-weight:bold;">Link:</p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab6-1.html">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab6-1.html</a>
+</body>
+</html>

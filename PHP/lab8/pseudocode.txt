@@ -1,0 +1,11 @@
+** Pseudocode
+#+begin_src html
+Edit ToXML and XSL for the controller and model
+Write the controller to use a isset to check for input
+-  Define default seach if no input around
+-  Match input to xsl's forum
+Create a model for controller
+Get input checks done, and break down the SQL seach into an array
+-  Get array to hold names of keys for search, and sub values
+-  Feel array back to controller for output. 
+#+end_src

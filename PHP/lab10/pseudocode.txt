@@ -1,0 +1,7 @@
+create an html form that posts to itself on an item being selected
+create 4 different css scripts
+start a session at the top of the file
+check to see if a option was selected
+	- if option was selected check to see what one
+		- load appropriate .css
+	- if not, do nothing

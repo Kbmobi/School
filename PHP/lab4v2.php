@@ -1,0 +1,106 @@
+<!--
+Lab Number -- 4
+Program Name if applicable -- Lab4
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 1 / 31 / 2013
+Time estimated to complete the lab - 1 hours
+Actual time taken to complete the lab - 4 hours
+A description of the program - 	1st = Use a loop to pull lines out of a log file, and print out IP and bytes in an array
+								
+Things required to run the program: lab4-1.html, lab4.php
+-->
+
+<?php
+//Sexy HCI stuff here
+echo "<div style='float:right;width:20%;padding-bottom:10px;margin-left:10px;' ><ul><li><a href='http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab4-1.html'>Try another file</a></li><li><a href='http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab4.html'>Return to main page</a></li></ul></div>";
+
+//Get the form input
+$dirtyLog = $_POST['file'];
+$logFile = htmlspecialchars(strip_tags(trim($dirtyLog)), ENT_QUOTES);
+
+if($logFile != "access_log" xor 
+	$logFile != "access_log.1" xor 
+	$logFile != "access_log.2" xor 
+	$logFile != "access_log.3" xor 
+	$logFile != "access_log.4" ){
+	echo "Something went wrong...";
+	} else {
+	
+	//regex that matches 0.0.0.0 through 255.255.255.255 within the apache log.
+	$ip = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/';
+
+	//Check the status code
+	$statusInfo = '/"+\s\d{3}/';
+	$statusStr = '/\b\d{1,}\b/';
+	
+	//bytes transfered out of the log check.
+	$byteInfo = '/\d{1,}\s+"/';
+	$byteStr = '/\b\d{1,}\b/';
+
+	//Creates an array to store the IP addressessessis.
+	$ipArray = array();
+
+	//put file in fariable
+	$out = fopen("/var/log/httpd/$logFile","r");
+	if($out){
+		//start a loop reading it line by line untill there are no more lines
+		while(! feof($out)){
+			$input = fgets($out);
+		
+			//Pull IP out of input line
+			preg_match($ip, $input, $ipAd);
+		
+			//Checks to make sure there is an ip address, then cleans it up
+			if($ipAd != NULL){
+				$cleanIp = $ipAd[0];
+				}
+			
+			//Get the status code and clean it
+			preg_match($statusInfo, $input, $tempStatusInfo);
+				
+			if($tempStatusInfo != NULL){
+				preg_match($statusStr, $tempStatusInfo[0], $statusCode);
+			}
+			
+			if($statusStr != NULL) {
+				$cleanCode = $statusCode[0];
+			}
+			
+			//Check to see if it is within 2XX range
+			if($cleanCode < 200 | $cleanCode > 299){
+				$cleanByteCount = 0;
+			} else {
+				//Check bytes transfered
+				preg_match($byteInfo, $input, $tempByteInfo);
+		
+				//Checks to make sure it got a value then takes off the extra tokens in the regex
+				if($tempByteInfo != NULL){
+					preg_match($byteStr, $tempByteInfo[0], $byteCount);
+					}
+		
+				//Checks to see if it has a value, then cleans it up.
+				if($byteCount != NULL){
+					$cleanByteCount = $byteCount[0];
+					}
+			}
+			
+			//Puts that ip address in an array, and adds the bytes to it.
+			if(isset($ipArray[$cleanIp])) {
+				$ipArray[$cleanIp] += $cleanByteCount;
+				} else { 
+				$ipArray[$cleanIp] = $cleanByteCount;
+				} 
+		
+			}
+		//close the file
+		fclose($out);
+	}
+	
+// Print out the entire array of IP's and Bytes in a nice looking table.	
+echo "<table border='2'><th>IP Address</th><th>Bytes Transfered</th>";
+foreach($ipArray as $s => $v) {
+	echo "<tr><td>$s</td><td>$v</td></tr>";
+		}
+echo "</table>"; 
+}
+?>

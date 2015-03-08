@@ -1,0 +1,15 @@
+<html><head><title>images</title></head>
+<body>
+<h1>square</h1>
+<img src="square.php">
+<h1>square2 (kinda)</h1>
+<img src="rectangle.php">
+<h1>triange</h1>
+<img src="triangle.php">
+<h1>triange2</h1>
+<img src="triangle2.php">
+<h1>circle</h1>
+<img src="circle.php">
+<h1>circle2</h1>
+<img src="circle2.php">
+</body></html>

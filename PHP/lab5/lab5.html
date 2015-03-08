@@ -1,0 +1,368 @@
+<html>
+<head><title>Lab 3 -- Keegan Bailey</title></head>
+<body>
+<p style="white-space:pre-wrap;">Lab Number -- 5
+Program Name if applicable -- Lab5
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 2 / 8 / 2013
+Time estimated to complete the lab - 6 hours
+Actual time taken to complete the lab - 8->10ish hours
+A description of the program - 	1st = complete querys
+								
+								2nd = make your own querys.
+								
+Things required to run the program: lab5.html, lab5-1.php, lab5-2.php	</p>
+<hr>
+<h3>Link to labs:</h3>
+<p>Lab 5 -- 1: </p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5-1.php">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5-1.php</a>	
+<p>Lab 5 -- 2: </p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5-2.php">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5-2.php</a>	
+<hr>
+<h1>Lab5 - Part 1</h1>
+<p style="font-weight:bold;">Psudocode:</p>
+<p style="white-space:pre-wrap;">
+	Copy and paste labs
+	Print result
+	</p>
+<p style="font-weight:bold;">Source Code:</p>	
+<textarea rows="30" cols="80"><html><head><title>Lab5-1 Keegan Bailey</title></head><body>
+<?php
+print 	"<h1>Lab 5 -- Part 1</h1>
+		<p> Keegan Bailey</p>";
+		
+// Connect to the MySQL server.
+$LinkID = mysql_connect("localhost", "170user", "phphasclass");
+
+// Die if no connect
+if (!$LinkID) {
+	die('Could not connect: ' . mysql_error());
+}
+
+// Choose the DB and run a query.
+mysql_select_db("comp170", $LinkID);
+$result = mysql_query( "
+SELECT employees.last_name AS \"Last Name\", 
+	jobs.job_title AS \"Job\", 
+	departments.department_id AS \"Depo#\", departments.department_name AS \"Department Name\"
+FROM employees, departments, jobs, locations
+WHERE departments.department_id = employees.department_id
+AND employees.job_id = jobs.job_id
+AND departments.location_id = locations.location_id
+AND UPPER(locations.city) = 'SOUTHLAKE';
+ " ,$LinkID);
+
+// Display the results.
+print 	"<h3>Question #1</h3>
+		<p>Write a query to display the last name, job, department number, and department name for all employees who work in Southlake, Texas. 
+		Be sure to handle case when checking that the city is Southlake. 
+		(Note: in this case, you may assume that the only \"Southlake\" is in Texas.)
+		<br>------<br>";
+if ($result) {
+		echo "<p>";
+		// Reset the result pointer and display again in a table with titles.
+		mysql_data_seek ($result, 0);
+	
+		// Fetch a row with the column labels
+		$x=mysql_fetch_assoc($result);
+	
+		// Print the column labels
+		print "<table border=1><tr><b>";
+		foreach (array_keys($x) as $k) {
+			print "<td>$k</td>";
+			}
+		print "</b></tr><tr>";
+	
+		// Print the values for the first row
+		foreach ($x as $v) {
+			print "<td>$v</td>";
+		}
+		print "</tr><tr>";
+	
+		// Print the rest of the rows.
+		while ($x=mysql_fetch_row($result)) {
+			foreach ($x as $v) {
+				print "<td>$v</td>";
+			}
+			print "</tr><tr>";
+		}
+	}
+echo "</tr></table><br><br><br>";
+
+$result = mysql_query( "
+SELECT e.last_name AS \"Lst Nm\",
+	ifNULL(d.department_name, 'None') AS \"Dpt Nm\"
+FROM employees e
+LEFT OUTER JOIN departments d
+ON d.department_id = e.department_id
+WHERE UPPER(e.last_name) LIKE 'G%';
+ " ,$LinkID);
+
+// Display the results.
+print 	"<h3>Question #2</h3>
+		<p>Write a query that will list all of the employees (last names), whose last name starts with 'G' 
+		(be sure to handle case), and the departments (give the name) to which they belong. Include all employees 
+		who have not yet been assigned to any department. (Note: do not use IS NULL or IS NOT NULL in your query.) 
+		<br>------<br>";
+if ($result) {
+		echo "<p>";
+		// Reset the result pointer and display again in a table with titles.
+		mysql_data_seek ($result, 0);
+	
+		// Fetch a row with the column labels
+		$x=mysql_fetch_assoc($result);
+	
+		// Print the column labels
+		print "<table border=1><tr><b>";
+		foreach (array_keys($x) as $k) {
+			print "<td>$k</td>";
+			}
+		print "</b></tr><tr>";
+	
+		// Print the values for the first row
+		foreach ($x as $v) {
+			print "<td>$v</td>";
+		}
+		print "</tr><tr>";
+	
+		// Print the rest of the rows.
+		while ($x=mysql_fetch_row($result)) {
+			foreach ($x as $v) {
+				print "<td>$v</td>";
+			}
+			print "</tr><tr>";
+		}
+	}
+echo "</tr></table><br><br><br>";
+
+$result = mysql_query( "
+SELECT e.last_name AS \"Employee\", 
+	e.employee_id AS \"Emp#\",
+	m.last_name AS \"Manager\",
+	m.manager_id AS \"Mgr#\"
+FROM employees e, employees m
+WHERE e.manager_id = m.employee_id
+AND UPPER(e.last_name) LIKE 'G%';
+ " ,$LinkID);
+
+// Display the results.
+print 	"<h3>Question #3</h3>
+		<p>Display the employee last name and employee number along with their manager’s last name and manager number (in other 
+		words the manager's employee id) for all employees whose last name begins with 'G' (be sure to handle case). Label the 
+		columns Employee, Emp#, Manager, and Mgr#, respectively (note the use of upper and lower case). 
+		<br>------<br>";
+if ($result) {
+		echo "<p>";
+		// Reset the result pointer and display again in a table with titles.
+		mysql_data_seek ($result, 0);
+	
+		// Fetch a row with the column labels
+		$x=mysql_fetch_assoc($result);
+	
+		// Print the column labels
+		print "<table border=1><tr><b>";
+		foreach (array_keys($x) as $k) {
+			print "<td>$k</td>";
+			}
+		print "</b></tr><tr>";
+	
+		// Print the values for the first row
+		foreach ($x as $v) {
+			print "<td>$v</td>";
+		}
+		print "</tr><tr>";
+	
+		// Print the rest of the rows.
+		while ($x=mysql_fetch_row($result)) {
+			foreach ($x as $v) {
+				print "<td>$v</td>";
+			}
+			print "</tr><tr>";
+		}
+	}
+echo "</tr></table><br><br><br><hr><a href='http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5-1.php'>Return to Main Page</a>";
+?>
+</body></html></textarea>			
+
+<hr>
+
+<h1>Lab5 - Part 2</h1>
+<p style="font-weight:bold;">Psudocode:</p>
+<p style="white-space:pre-wrap;">Create a form for input
+	-make form post to sell
+Make PHP only run once you've submit
+Input check inputs with regex to protect from SQL Injections
+	- clean up slashed and other things
+Check to make sure WHERE has or has not been filled
+	-if filled, clean and use
+	-if not, do nothing
+Return out of PHP if anything is fishy
+Copy and paste rest from died. 
+
+</p>
+<br>
+<p style="font-weight:bold;">Source Code:</p>	
+<textarea rows="30" cols="80"><html>
+	<head>
+		<title>Lab5-2 Keegan Bailey</title>
+	</head>
+<body>
+<img src="http://hal.cs.camosun.bc.ca/~weston/comp155/ERD_HR.gif">
+<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" >
+	<fieldset style="width:575px;">
+		<legend>Cool stuff here</legend>
+		<label>SELECT</label>
+			<input type = 'text' name = 'select' required placeholder = 'example: *' style="width:500px; height:40px; 
+							background-color:black; color:lime; 
+									
+							-webkit-border-radius:5px;
+							-moz-border-radius:5px;
+							-o-border-radius:5px;
+							-ms-border-radius:5px;
+							border-radius:5px;
+									
+							-moz-transition:padding .25s;
+							-webkit-transition:padding .25s;
+							-o-transition:padding .25s;
+							transition:padding .25s;}" /><br>
+		<label>FROM &nbsp </label>
+			<input type = 'text' name = 'from' required placeholder = 'example: employees' style="width:500px; height:40px; 
+							background-color:black; color:lime; 
+									
+							-webkit-border-radius:5px;
+							-moz-border-radius:5px;
+							-o-border-radius:5px;
+							-ms-border-radius:5px;
+							border-radius:5px;
+									
+							-moz-transition:padding .25s;
+							-webkit-transition:padding .25s;
+							-o-transition:padding .25s;
+							transition:padding .25s;}" /><br>
+		<label>WHERE</label>
+			<input type = 'text' name = 'where' style="width:500px; height:40px; 
+							background-color:black; color:lime; 
+									
+							-webkit-border-radius:5px;
+							-moz-border-radius:5px;
+							-o-border-radius:5px;
+							-ms-border-radius:5px;
+							border-radius:5px;
+									
+							-moz-transition:padding .25s;
+							-webkit-transition:padding .25s;
+							-o-transition:padding .25s;
+							transition:padding .25s;}" /><br> 
+	<input value="Query!" type="submit" />
+	</fieldset>
+</form>
+
+
+
+<?php
+//check to see if something has been posted by the form
+if(isset($_POST['select'])){
+
+//assign posts to variables
+	$ds = $_POST['select'];
+	$df = $_POST['from'];
+	$hci = "<hr><a href='http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab5.html'>Return to Main Page</a>";
+	
+//set up regex for input ghetto checks	
+	$notCoolBro = '/(\bselect\b|\bfrom\b|\bwhere\b|\binput\b|\bdrop\b|\btruncate\b|;)/i';
+
+	preg_match($notCoolBro, $ds, $sCheck);
+	preg_match($notCoolBro, $df, $fCheck);	
+
+	
+//if a match is found, return out and print error msg. If no matches are found, strip any slashes, and assign new variable.	
+	if ($sCheck != NULL ) {
+		echo "Got a dirty select".$hci;
+		return;
+	} else {
+		$s = stripslashes($ds);
+	}
+
+	if ($fCheck != NULL ) {
+		echo "Got a dirty from".$hci;
+		return;
+	} else {
+		$f = stripslashes($df);
+	}
+
+//Check to see if there WHERE field was used.
+	if($_POST['where'] != NULL){
+		$dw = $_POST['where'];
+
+		
+//more input checking and assembling of query based off of where verb.		
+		preg_match($notCoolBro, $dw, $wCheck);		
+
+		if ($wCheck != NULL) {
+			echo "Got a dirty where dude".$hci;
+			return;
+		} else {
+			$w = stripslashes($dw);
+		}	
+
+		$query = 'select '.$s.' from '.$f.' where '.$w.';';
+	
+		echo $query;
+	} else {
+		$query = 'select '.$s.' from '.$f.';';
+
+		echo $query;
+	}
+	
+	// Connect to the MySQL server.
+	$LinkID = mysql_connect("localhost", "170user", "phphasclass");
+
+	// Die if no connect
+	if (!$LinkID) {
+		die('Could not connect: ' . mysql_error());
+	}
+
+	// Choose the DB and run a query.
+	mysql_select_db("comp170", $LinkID);
+	$result = mysql_query( $query ,$LinkID);
+	
+	// Display the results.
+	print 	"<h3>Result</h3>
+		<br>------<br>";
+	if ($result) {
+		echo "<p>";
+		// Reset the result pointer and display again in a table with titles.
+		mysql_data_seek ($result, 0);
+	
+		// Fetch a row with the column labels
+		$x=mysql_fetch_assoc($result);
+	
+		// Print the column labels
+		print "<table border=1><tr><b>";
+		foreach (array_keys($x) as $k) {
+			print "<td>$k</td>";
+			}
+		print "</b></tr><tr>";
+	
+		// Print the values for the first row
+		foreach ($x as $v) {
+			print "<td>$v</td>";
+		}
+		print "</tr><tr>";
+	
+		// Print the rest of the rows.
+		while ($x=mysql_fetch_row($result)) {
+			foreach ($x as $v) {
+				print "<td>$v</td>";
+				}
+			print "</tr><tr>";
+			}
+		}
+		echo "</tr></table><br><br><br>".$hci;
+	}
+?>
+</body>
+</html></textarea>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--
+Lab Number: 9
+Program Name if applicable: Lab9
+Author name and email addres: Keegan Bailey, kbailey.v@gmail.com
+Date of submission: 3/2/2013
+Time estimated to complete the lab: 6 hours
+Actual time taken to complete the lab: 10 minutes (all heavy lifting was done in lab5)
+A description of the program: Use Ajax to make SQL querys
+required to run the program if applicable: lab9.html, jquery.js, mysql.php
+-->
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+//Get the submit button to send over the inputs
+$(document).ready(function(){
+  $("#b3").click(function(){
+    $("#query").load("mysql.php", {'select':$('#select').val(), 'from':$('#from').val(), 'where':$('#where').val(),});
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>Lab 9</h2>
+<div id="query"><br></div>
+<button id="b3">Submit</button>
+
+<form>
+	<label>SELECT</label>
+		<input type = 'text' id = 'select' required placeholder = 'example: *' style="width:500px; height:40px; 
+							background-color:black; color:lime;"/><br>
+	<label>FROM</label>
+		<input type = 'text' id = 'from' required placeholder = 'example: employees' style="width:500px; height:40px; 
+							background-color:black; color:lime;" /><br>
+	<label>WHERE</label>
+		<input type = 'text' id = 'where' style="width:500px; height:40px; 
+							background-color:black; color:lime;" /><br> 
+</form>
+
+</body>
+</html>

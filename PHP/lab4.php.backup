@@ -1,0 +1,58 @@
+<?php
+$logFile = $_POST['file'];
+
+//regex that matches 0.0.0.0 through 255.255.255.255 within the apache log.
+$ip = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/';
+//bytes transfered out of the log check. 
+$info = '/\d{1,}\s+"/';
+$info2 = '/\b\d{1,}\b/';
+//status code check
+$stat = '/"\s\d{3}/';
+$stat2 = '/\b\d{3}\b/';
+//Creates an array to store the IP addressessessis.
+$ipArray = array();
+
+$out = fopen("/var/log/httpd/$logFile","r");
+if($out){
+	while(! feof($out)){
+		$input = fgets($out);
+		
+		preg_match($ip, $input, $ipAd);
+		$cleanIp = $ipAd[0];
+		
+		//Check status code
+		preg_match($stat, $input, $tempStat);
+		preg_match($stat2, $tempStat[0], $statusCode);
+		
+		//Check to see if Status Code is an error
+		if($statusCode[0] < 199 | $statusCode[0] > 299){			
+			$cleanByte = 0;
+		} else {
+			//Check bytes transfered
+			preg_match($info, $input, $tempByte);
+			echo $tempByte[0];
+			$temp = $tempByte[0];
+			echo $temp;
+			preg_match($info2, $temp, $byte);
+			$cleanByte = $byte[0];
+		}
+		
+		if(isset($ipArray[$cleanIp])) {
+			$ipArray[$cleanIp] += $cleanByte;
+		}
+		
+		if(! isset($ipArray[$cleanIp])) {
+			$ipArray[$cleanIp] = $cleanByte;
+		} 
+		
+		}
+	fclose($out);
+	}
+	
+echo "<table boarder='2'><th>IP Address</th><th>Bytes Transfered</th>";
+foreach($ipArray as $s => $v) {
+	echo "<tr><td>$s</td><td>$v</td></tr>";
+		}
+echo "</table>"
+
+?>

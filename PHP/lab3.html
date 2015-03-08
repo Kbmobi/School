@@ -1,0 +1,118 @@
+<html>
+<head><title>Lab 3 -- Keegan Bailey</title></head>
+<body>
+<p style="white-space:pre-wrap;">Lab Number -- 3
+Program Name if applicable -- Lab3
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 1 / 22 / 2013
+Time estimated to complete the lab - 6 hours
+Actual time taken to complete the lab - 4ish hours
+A description of the program - 	1st = Break down an apache log file entry
+								And diplay ip address, connection status code
+								bytes transfered.
+								
+								2nd = replace words within a string.
+								
+Things required to run the program: lab3.html, lab3-1.html, lab3-1.php, lab3-2.php	</p>
+<hr>
+<h3>Link to labs:</h3>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab3-1.html">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab3-1.html</a>	
+<hr>
+<h1>Lab3 - Part 1</h1>
+<p style="font-weight:bold;">Psudocode:</p>
+<p style="white-space:pre-wrap;">Assign the input text to a variable. 
+Use Regular Expressions to match 0.0.0.0 through 255.255.255.255 within the apache log.
+Pull the ip address out of the log, and stick it in an array.
+Pull the connection status code, and bytes transfered out of the log. 
+	-Put pulled info into an split array 
+	-Assign those to variables
+Print IP address.
+Check to see if the code is an error 400/500.
+	-If error, say so, and link to explanation.
+	-If not error, say so, and show bytes transmitted.</p>
+<p style="font-weight:bold;">Source Code:</p>	
+<textarea rows="30" cols="80"><?php
+//assign the input text to a variable. 
+$log = $_POST['log'];
+$help = "<a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10'>Look up Error Here!</a>"; 
+
+//regex that matches 0.0.0.0 through 255.255.255.255 within the apache log.
+$ip = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/';
+//pull the ip address out of the log, and stick it in an array.
+preg_match($ip, $log, $match1);
+
+//pull the connection status code, and bytes transfered out of the log. 
+$info = '/\"+\s+\d{3}+\s+\d{1,}+\s+\"/';
+
+//Create an array for input checking
+$result = preg_match_all($ip, $log, $result);
+$result2 = preg_match_all($info, $log, $result2);
+
+//Check to see if the 2 arrays are empty
+if ($result == 0 | $result2 == 0) {
+	//error message if it did not work
+	echo $log . " did not seem to parse properly, please try again";
+	echo "<hr><a href='lab3-1.html'>Click here to try another</a><br><a href='lab3.html'>Click here to head back to main Page</a>";
+} else {
+	//good message if it did
+	preg_match($info, $log, $match2);
+	$str = $match2[0];
+
+	//put pulled info into an split array 
+	$split = '/\"|\s/';
+	$info2 = preg_split($split, $str);
+
+	//assign array to variables
+	$code = $info2[2]; 
+	$byte = $info2[3];
+
+	//print IP address.
+	echo "<br>The IP address is: " . $match1[0] . "<br><br><br>";
+
+	//Check to see if the code is an error 400/500.
+	if ($code >= 400) {
+		//if error, say so, and link to explanation.
+		echo "<br>Connection Failed! <br>Code: ".$code."<br> Bytes Transmitted: 0 <br>".$help;
+	} else {
+		//if not error, say so, and show bytes transmitted.
+		echo "<br>Connection Good! <br>Code: ".$code."<br> Bytes Transmitted: ".$byte;
+	}
+	echo "<hr><a href='lab3-1.html'>Click here to try another</a><br><a href='lab3.html'>Click here to head back to main Page</a>";
+}
+
+?></textarea>			
+
+<hr>
+
+<h1>Lab3 - Part 2</h1>
+<p style="font-weight:bold;">Psudocode:</p>
+<p style="white-space:pre-wrap;">Variable the following:
+	-User input
+	-Key words to replace (regex)
+	-Replacement Word
+Use the replace function to take the words out of the string, and replace them with the replacement word.
+Assign that to a new variable.
+Print new string.
+</p>
+<br>
+<p style="font-weight:bold;">Source Code:</p>	
+<textarea rows="30" cols="80"><?php
+//take user input and place it in a variable.
+$str = $_POST['str'];
+//get regex key words, and put them in a variable.
+$keyWords = '/(\bfear\b|\bwaddy\b|\bgear\b|\bfiasco\b|\bfobbing\b)/i';
+//get replacement word, and put that in a varable as well. I like turtles.
+$repWord = '1969-10-29';
+
+//use the replace function to take the words out of the string, and replace them with the replacement word.
+//Then assign that to a new variable
+$newStr = preg_replace($keyWords, $repWord, $str);
+
+//Print out new string for user to read, and probably get confused.
+echo "<h1>Your new string!</h1>"."<p>".$newStr."</p>";
+
+//give info on what that date is actually important.
+echo '<h1>Arpanet (1969-10-29) -- The start of the Internet!</h1><br><br><iframe width="420" height="315" src="http://www.youtube.com/embed/CRD7TnJvIN8" frameborder="0" allowfullscreen></iframe>';
+echo "<hr><a href='lab3-1.html'>Click here to try another</a><br><a href='lab3.html'>Click here to head back to main Page</a>";
+
+?></textarea>

@@ -1,0 +1,90 @@
+<!--
+Lab Number -- 3
+Program Name if applicable -- Lab3
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 1 / 22 / 2013
+Time estimated to complete the lab - 6 hours
+Actual time taken to complete the lab - 4ish hours
+A description of the program - 	1st = Break down an apache log file entry
+								And diplay ip address, connection status code
+								bytes transfered.
+								
+								2nd = replace words within a string.
+								
+Things required to run the program: lab3.html, lab3-1.html, lab3-1.php, lab3-2.php																
+-->
+<html>
+	<head>
+		<title>Lab 3 -- Keegan Bailey</title>
+	</head>
+	<body>
+		<h1>PHP Lab 3 -- Keegan Bailey</h1>
+		<ol><h3>Instructions to parse a apache log file</h3>
+			<li>Log into Deepblue</li>
+			<li>In bash, use <code>$ cd /var/log/httpd</code></li>
+			<li>Access any access_log with <code>$ less access_log</code></li>
+			<li>Copy a line, and paste it in the input box below</li>
+		</ol>
+		<br>
+		
+		<form method="post" action="lab3-1.php">
+		<!-- if you do not understand this:
+		http://www.w3schools.com/tags/tag_form.asp
+			-->
+			<fieldset>
+			<legend>Copy and Paste</legend>
+			<input name="log"  style="width:750px; height:40px; 
+									background-color:black; color:lime; 
+									
+									-webkit-border-radius:5px;
+									-moz-border-radius:5px;
+									-o-border-radius:5px;
+									-ms-border-radius:5px;
+									border-radius:5px;
+									
+									-moz-transition:padding .25s;
+									-webkit-transition:padding .25s;
+									-o-transition:padding .25s;
+									transition:padding .25s;}" type="text" required placeholder="Copy and Paste into this section" /><input value="Parse" type="submit" />
+			</fieldset></form>
+			<br>
+			<br>
+			
+		<ol><h3>Instructions </h3>
+			<li>Place hands on keyboard.</li>
+			<li>use your distal phalanges to input keystrokes in the input box.</li>
+			<li>Type in a sentence that contains 1 or many of the following words</li>
+				<ul><li>fear</li>
+					<li>waddy</li>
+					<li>gear</li>
+					<li>fiasco</li>
+					<li>fobbing</li></ul>
+			<li>Press the magic button when finished typing</li>
+		</ol>
+		<br>
+		
+		<form method="post" action="lab3-2.php">
+		<!-- if you do not understand this:
+		http://www.w3schools.com/tags/tag_form.asp
+			-->
+			<fieldset>
+			<legend>Type something in</legend>
+			<input name="str"  style="width:750px; height:40px; 
+									background-color:black; color:lime; 
+									
+									-webkit-border-radius:5px;
+									-moz-border-radius:5px;
+									-o-border-radius:5px;
+									-ms-border-radius:5px;
+									border-radius:5px;
+									
+									-moz-transition:padding .25s;
+									-webkit-transition:padding .25s;
+									-o-transition:padding .25s;
+									transition:padding .25s;}" type="text" required placeholder="Copy and Past into this section" /><input value="Magic Button" type="submit" />
+			</fieldset><br>
+			<br>
+		<hr>
+		<a href="lab3.html">Main Page</a>
+		</form>
+	</body>

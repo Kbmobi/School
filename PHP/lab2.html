@@ -1,0 +1,119 @@
+<html>
+<head><title>Lab 2</title></head>
+<body>
+<p style="white-space:pre-wrap;">Lab Number -- 2
+Program Name if applicable -- Lab2
+Author name and email address - Keegan Bailey, kbailey.v@gmail.com
+Date of submission - 1 / 16 / 2013
+Time estimated to complete the lab - 4 hours
+Actual time taken to complete the lab - the whole lab, not individual parts - 4ish hours
+A description of the program - 	1st = basic "hello world" PHP and uses $_GET and you must use, 
+						and you must use quary string eg: lab2-1.php?name=foobafizzle 
+						to get it to display your name.
+								
+						2nd = crappy calculator that uses $_POST; just fill in the blanks.
+								
+required to run the program if applicable: 	lab2.html
+								lab2-1.php
+								lab2-2.html
+								lab2-2.php
+																						 
+								Internet may be required, maybe..</p>
+<h1>Lab2 - Part 1</h1>
+
+<p style="font-weight:bold;">Psudocode:</p>
+
+<p style="white-space:pre-wrap;">set a few variables for basic html
+	- break lines
+	- text
+	- headers
+set variable to retrive todays date
+create 3 horizontal lines, make thier max length 800
+	- change the colour of the middle on to blue 
+	- make middle bars width scale off of the current hour.
+	- create a variable for containing the current hour, and multiply it by 800, then divide by 24.
+display the user's client
+add link to head back to main page.</p>
+<br>
+<p style="font-weight:bold;">Source Code:</p>
+<textarea rows="30" cols="100"><?php
+//Setting variable for todays date and time. 
+//I used escapes because I have never used them within PHP before, so 
+//I decided to use them in here.
+$today = date("\T\h\e \c\u\\r\\r\e\\n\\t \d\a\\t\e \& \\t\i\m\e \i\s\: Y-m-d H:i"); 
+
+//Sets a variable to be used within the horizonal like html tag to ajust the width
+//based off the current hour of the day.
+//the "* 800 / 24" is to makes it actually fill a bar in noticable increments, rather then just
+//max out at 24px 
+$width = date("H") * 800 / 24;
+
+//Basic variables with HTML tags and text within them
+//Only created for expermientation with how PHP works
+$br = "<br>";
+$helloWorld = "<h1>Hello World!</h1>";
+
+//Masterfully used deprecated HTML attributes to modify horizontal lines (reference back to $width comments)
+//first one is a unchangeable horizontal line
+//second one is a changeable line that uses the variable $width, and it also blue.
+$horizontalLine = "<hr width='800' align='left'>";;
+$blueLine = "<hr width='$width' color='#0000FF' size= '15' align='left'>";
+
+//Prints Hello World! in header 1 font size.
+echo $helloWorld;
+
+//Print statement using a query string
+echo "Welcome " . htmlspecialchars($_GET["name"]) . "!" . $br;
+
+//Prints todays date
+echo $today;
+
+//Show horizontal lines that fill as day's hours progress
+echo $horizontalLine . $blueLine . $horizontalLine;
+
+//Print Browser the user is using on the screen
+echo $_SERVER["HTTP_USER_AGENT"];
+
+//link back to main page
+echo $br . "<a href='lab2.html'>Main Page</a>";
+?></textarea>
+
+<p style="font-weight:bold;">Link:</p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab2-1.php?name=Keegan">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab2-1.php?name=Keegan</a>
+
+<h1>Lab2 - Part 2</h1>
+<p style="font-weight:bold;">Psudocode:</p>
+<p style="white-space:pre-wrap;">Set form values and names to variables
+Create array with all options
+Print opperation and answer
+link back to form, or main page.</p>
+
+<p style="font-weight:bold;">Source Code:</p>
+
+<textarea rows="30" cols="100"><?php
+//set form values to variables
+$val1 = $_POST['val1'];
+$val2 = $_POST['val2'];
+$op = $_POST['op'];
+
+//create an array with all possible answer
+$answer = array('+' => '$val1 + $val2', 
+		'-' => '$val1 - $val2',
+		'/' => '$val1 / $val2',
+		'*' => '$val1 * $val2',
+		'**' => 'pow($val1, $val2)');
+
+//Evauate the array with the correct string in it, and assign it to a variable.
+$answer = eval("echo $answer[$op];");
+		
+//print the selected values
+echo " = ". $val1 . $op . $val2;
+echo $answer;
+
+//Create a link to go back to the form.
+echo '<br><a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab2-2.html">Click here to do another calculation</a>';
+echo '<br><a href="lab2.html">Main Page</a></br>';
+?></textarea>
+<p style="font-weight:bold;">Link:</p>
+<a href="http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab2-2.html">http://deepblue.cs.camosun.bc.ca/~cst228/comp170/lab2-2.html</a>
+</body></html>

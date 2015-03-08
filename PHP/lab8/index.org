@@ -1,0 +1,292 @@
+* Lab 8
+#+BEGIN_VERSE
+Lab Number: 8
+Program Name if applicable: Lab8
+Author name and email addres: Keegan Bailey, kbailey.v@gmail.com
+Date of submission: 3/2/2013
+Time estimated to complete the lab: 6 hours
+Actual time taken to complete the lab: 8 hours
+A description of the program: Use MVC to make SQL querys
+required to run the program if applicable: controller.php, model.php, toXML.php, view.xsl, sq_connect.inc
+#+END_VERSE
+** Pseudocode
+#+begin_src html
+Edit ToXML and XSL for the controller and model
+Write the controller to use a isset to check for input
+-  Define default seach if no input around
+-  Match input to xsl's forum
+Create a model for controller
+Get input checks done, and break down the SQL seach into an array
+-  Get array to hold names of keys for search, and sub values
+-  Feel array back to controller for output. 
+#+end_src
+*** controller.php
+#+begin_src php
+<?php
+require_once "model.php";
+require_once "toXML.php";
+
+//check to see if something has been posted by the model
+if(isset($_POST['input'])) {
+	$input = $_POST['input'];
+	$select = $input[0];
+	$from = $input[1];
+	$where = $input[2];
+  } else {
+	$select = "*";
+	$from = "jobs";
+	$where = "lower(job_id) = 'ad_pres'";
+  }	
+	
+// Pass it to the model
+$things = sqlsearch($select, $from, $where);
+
+// Convert data from the model to xml
+$xml = toXML($things);
+
+// Output the xml to the view;
+header('Content-Type: text/xml');
+echo $xml; 	
+?>
+#+end_src
+*** model.php
+#+begin_src php
+<?php
+//Model Module
+function sqlsearch($select, $from, $where) {
+	$ds = $select;
+	$df = $from;
+
+	//set up regex for input checks	
+	$notCoolBro = '/(\bdrop\b|\btruncate\b|;)/i';
+
+	preg_match($notCoolBro, $ds, $sCheck);
+	preg_match($notCoolBro, $df, $fCheck);	
+
+	
+	//if a match is found, return out and print error msg. If no matches are found, strip any slashes, and assign new variable.	
+	if ($sCheck != NULL ) {
+		die('broke at select check');
+	} else {
+		$s = stripslashes($ds);
+	}
+
+	if ($fCheck != NULL ) {
+		die('broke at from check');
+	} else {
+		$f = stripslashes($df);
+	}
+
+	//Check to see if there WHERE field was used.
+	if($where != NULL){
+		$dw = $where;
+
+		//more input checking and assembling of query based off of where verb.		
+		preg_match($notCoolBro, $dw, $wCheck);		
+
+		if ($wCheck != NULL) {
+			die('broke at where check');
+		} else {
+			$w = stripslashes($dw);
+		}	
+		$query = 'select '.$s.' from '.$f.' where '.$w.';';
+	} else {
+		$query = 'select '.$s.' from '.$f.';';
+	}
+	
+	// Connect to the MySQL server.
+	include '../../../sq_connect.inc';
+
+	// Die if no connect
+	if (!$LinkID) {
+		die('Could not connect: ' . mysql_error());
+	}
+	// Choose the DB and run a query.
+	mysql_select_db("comp170", $LinkID);
+	$result = mysql_query($query, $LinkID);
+	
+	mysql_data_seek($result, 0);
+	// Fetch a row with the column labels
+	$x = mysql_fetch_assoc($result);
+	$resultArray = array();
+	$one = array();
+	$two = array();
+			
+	foreach($x as $x=>$k) {
+		$one[] = $x;
+		$two[] = $k;
+	}
+	
+	$resultArray[] = $one;
+	$resultArray[] = $two;
+
+	while ($x = mysql_fetch_row($result)) {
+		$one = array();
+		foreach($x as $x=>$k) {
+			$one[] = $k;
+		}
+	$resultArray[] = $one;
+	}
+   
+// Create the output array
+    $list['name']     = "Lab 8";
+    $list['outTitle'] = "Output";
+    $list['outValue'] = $resultArray;
+
+// Create the input array
+    $list['inTitle']  = "Input";
+    $list['inValue']['select']  = $select;
+    $list['inValue']['from']  = $from;
+    $list['inValue']['where']  = $where;
+
+// Return the array
+    return $list;
+  }
+?>
+#+end_src
+*** toXML.php
+#+begin_src php
+<?php
+// Convert the input array to XML
+  function toXML($inArray) {
+
+//    $document = new DomDocument('1.0');
+    $document = new DomDocument("1.0", "ISO-8859-15");
+
+/*  
+    The following does not work for most browser.  They seem to take offence with the 
+    DOCTYPE line added by the LoadHTML.  This is now done after the document has been created
+    below.
+*/
+
+//  Tell the resulting XML that this extensible style sheet will transform the resulting XML
+//    $foo = $document->loadHTML('<?xml-stylesheet type="text/xsl" href="view.xsl">'); 
+
+// create the root node
+    $root = $document->createElement('root');
+    $root = $document->appendChild($root);
+
+// create the title node
+    $elemt = $document->createElement('title');
+    $elemt = $root->appendChild($elemt);
+
+    $elem0 = $document->createTextNode($inArray['name']);
+    $elem0 = $elemt->appendChild($elem0);
+
+// create the input data node
+    $elem1 = $document->createElement('Input');
+    $elem1 = $root->appendChild($elem1);
+
+// create the input title node
+    $elemt = $document->createElement('title');
+    $elemt = $elem1->appendChild($elemt);
+
+    $elem0 = $document->createTextNode($inArray['inTitle']);
+    $elem0 = $elemt->appendChild($elem0);
+
+    foreach ($inArray['inValue'] as $name => $value) {
+// add a child node for each input entry
+      $entry = $document->createElement('entry');
+      $entry = $elem1->appendChild($entry);
+
+      $child = $document->createElement('name');
+      $child = $entry->appendChild($child);
+
+      $v0 = $document->createTextNode($name);
+      $v0 = $child->appendChild($v0);
+      
+      $child = $document->createElement('value');
+      $child = $entry->appendChild($child);
+
+      $v1 = $document->createTextNode($value);
+      $v1 = $child->appendChild($v1);
+    }
+// create the output data node
+    $elem2 = $document->createElement('Output');
+    $elem2 = $root->appendChild($elem2);
+
+// create the output title node
+    $elemt = $document->createElement('title');
+    $elemt = $elem2->appendChild($elemt);
+
+    $elem0 = $document->createTextNode($inArray['outTitle']);
+    $elem0 = $elemt->appendChild($elem0);
+
+// add a child node for each output entry
+    foreach ($inArray['outValue'] as $name => $value) {
+	
+		$entry = $document->createElement('entry');
+		$entry = $elem2->appendChild($entry);
+
+		$child = $document->createElement('name');
+		$child = $entry->appendChild($child);
+		foreach ($value as $key => $data){
+      
+		$child = $document->createElement('value');
+		$child = $entry->appendChild($child);
+
+		$v1 = $document->createTextNode($data);
+		$v1 = $child->appendChild($v1);
+		}
+    }
+
+// return the completed xml document formatted nicely.
+    $document->formatOutput = true;
+    $doc = $document->saveXML();
+
+// Split the XML into an array and add in the style sheet information then put it back together into a string.
+    $docArray = split("\n", $doc);
+    array_splice($docArray, 1, 0, '<?xml-stylesheet type="text/xsl" href="view.xsl"?>');
+    $doc = join("\n", $docArray);
+    return $doc;
+  }
+?>
+#+end_src
+*** view.xsl
+#+begin_src html
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+ <xsl:template match="/">
+  <html>
+   <body>
+        <h1>
+		<xsl:value-of select="root/title"/>
+	</h1>
+	<h2>
+		<xsl:value-of select="root/Input/title"/>
+	</h2>
+	<form method="post" action="controller.php">
+		<ul>
+			<xsl:for-each select="root/Input/entry">
+				<li>
+					<xsl:value-of select="name"/>:
+					<input type="text" name="input[]" value="{value}"/>
+				</li>
+			</xsl:for-each>
+		</ul>
+		<input type="submit"/>
+	</form>
+	<h2>
+		<xsl:value-of select="root/Output/title"/>
+	</h2>
+	<table border="1">
+		<xsl:for-each select="root/Output/entry">
+			<tr>
+				<xsl:for-each select="value">
+					<td>
+						<xsl:value-of select="."/>
+					</td>
+				</xsl:for-each>
+			</tr>
+		</xsl:for-each>
+	</table>
+   </body>
+  </html>
+ </xsl:template>
+</xsl:stylesheet>
+#+end_src
+*** sq_connect.inc
+#+begin_src php
+<? php
+	$LinkID = mysql_connect("localhost", "170user", "phphasclass");
+?>
+#+end_src
