@@ -1,0 +1,22 @@
+#! /usr/bin/python
+
+import thread 
+import time
+import util
+import random
+
+def counter(myId, count):
+    print 'starting rance(count) and myId is',myId,'and count is',count
+    for i in range(count):
+#       time.sleep(random.randint(1, 20))
+        print 'Thread %s at count %s' % (myId, i) 
+        
+def stNew(n):
+    print 'made it to stNew(n) and n is:',n
+    for i in range(n):
+        print "You're starting thread.start_new"
+        thread.start_new(counter, (i, 5))
+
+myMutex = thread.allocate_lock()
+threadCount = util.getInt('Please input the number for the range of threads: ', 'error')
+stNew(threadCount)
