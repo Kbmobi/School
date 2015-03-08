@@ -1,0 +1,91 @@
+import fractions
+import util
+
+def restart(): #Made for restarting the program.
+    answer = raw_input("Do you want to restart this program? ")
+    if answer.strip() in "y Y yes Yes YES".split():
+        return start()
+    else:
+        print '\n\nThank you for using my program.\n\nKeegan Bailey\nC0369801'
+# ------------------------------------------------------------------------------
+def selected_option(n):
+    if n == 1:
+        print "Input an integer and then print the next 10 numbers."
+        num = util.getInt()
+        print util.nextTen(num)
+        return restart()
+    if n == 2:
+        print "greatest common divisor of 2 numbers."
+        num1 = util.getInt('Please input 1st integer: ','Try Again')
+        num2 = util.getInt('Please input 2nd integer: ','Try Again')
+        if num1 < 1 or num2 < 1:
+            print "Start over--do not use negative numbers!"
+            return selected_option(2)
+        else:
+            print "The greatest common divisor of your 2 numbers is:",util.GCD(num1, num2),"\n"
+            return restart()
+    if n == 3:
+        print "the sum of a series of numbers."
+        print "###########################################################"
+        print "#  the series ends when the user enters a negative number #"
+        print "###########################################################"
+        util.stNum()
+        return restart()
+    if n == 4:
+        print "Print that positive number's factorial."
+        n = util.getInt()
+        print util.factLoop(n),
+        print "is your result..."
+        return restart()
+    if n == 5:
+        print "Newton-Raphson square rooting." # 
+        n = util.getInt("Please input an initial value: ", "error")
+        delta = util.getInt("Please input a tolerance (delta): ", "error")
+        xold = util.getInt("Please input your initial approximation(guess): ", "error")
+        xold = float(xold)
+        print util.newRaph(n, delta, xold),
+        print "is your answer I think."
+        return restart()
+    if n == 6:
+        print "Print a NxN square of asterisks"
+        N = util.getInt()
+        util.getGrid(N)
+        return restart()
+    if n == 7:
+        print "Print a NxN square of user input symbols"
+        N = util.getInt()
+        gVar = raw_input('Put in anything you want to be in a grid: ')
+        util.getGrid2(N)
+        return restart()
+
+#Idiot checking to see if they entered an invalid option.
+
+def idiot_check(n):
+    if n > 7:
+        print 'You did not input a valid number, please try again.\n\n\n'
+        return restart()
+    elif n < 1:
+        print 'You did not input a valid number, please try again.\n\n\n'
+        return restart()
+    elif 8 > n > 0:
+        print '\nYour input was accepted.\n'
+        return selected_option(n)
+    else:
+        print '\nError #0\n'
+        return restart()
+    
+def start():  # start of the program.
+    print "#1 --  Input an integer and then print the next 10 numbers."
+    print "#2 --  Greatest common divisor of 2 numbers."
+    print "#3 --  Sum a series of numbers"
+    print "#4 --  Print that positive number's factorial."
+    print "#5 --  The Newton-Raphson method for calculating square roots."
+    print "#6 --  Print a NxN square of asterisks, as (N=5)."
+    print "--------------------------------------------------------------"
+    n = input('Please select an option now: ') 
+    return idiot_check(n) # checks to see if the user is retarded.
+
+if __name__ == '__main__':
+    print "Keegan Bailey\nC0369801\nComp112 -- Lab03\n\n"
+    print "Please select one of the following options:\n"
+    start()

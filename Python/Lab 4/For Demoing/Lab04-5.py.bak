@@ -1,0 +1,30 @@
+import util
+
+def factLoop(var):
+    res = 1
+    while var > 1:
+        res *= var
+        var -= 1
+    return res
+
+def vE(n): # n! = n * (n-1) * (n-2) * ... * 1
+    var = 1 # Sets the default variable to use throughout the loop
+    stop = n # Sets stop to the number sents in through the argument.
+             #It's reset to stop because the number will change often
+    e = 1   #Sets e to 1, e always starts @ 1
+    while var <= stop: # Loops until Var is les then or equal to stop(starting input)
+        e = e+(1.0/factLoop(var)) #function to create a new e for printing,
+        '''and uses e+1/n!. n! is done by factiorial loop, so the more you want to
+loop, the higher the factorial will get, it will start at 1, and go from there
+1, 2, 6, 24, 120, 720, 5040, 40320 | Factiorials function as follows: Factorial of
+5 for example is 5*4*3*2*1=120
+'''
+        print "Loop #",var,"\t=\t",e # prints once per loop with 2 variables. 
+        var += 1
+
+if __name__ == '__main__':
+    print "Keegan Bailey\nC0369801\nComp112 -- Lab04\n\n"
+    print "Prompt for the number of terms to use and then calculate the value of e"
+    n = util.getInt()
+    vE(n)
+    raw_input()

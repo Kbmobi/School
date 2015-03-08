@@ -1,0 +1,22 @@
+import util
+
+def printMultiples(n, length, col):
+    if col <= length:
+        print n*col, '\t', 
+        col += 1
+        return printMultiples(n, length, col)
+    else:
+        print
+    
+def printMultTable(i, length):
+    if i <= length:
+        col = 1
+        printMultiples(i, length, col)
+        i += 1
+        return printMultTable(i, length)
+
+if __name__ == '__main__':
+    print "Keegan Bailey\nC0369801\nComp112 -- Lab04\n\n"
+    length = util.getInt('To what number do you want the table to print: ', 'unacceptable')
+    i = 1
+    printMultTable(i, length)

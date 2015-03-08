@@ -1,0 +1,25 @@
+import string
+
+def isvFloat(num):
+    pos = 0
+    if num[0] in "+-":
+        sign = num[0]
+        pos += 1
+    else:
+        sign = "+"
+    while pos < len(num):
+        if num[pos] not in string.digits or ".":
+            return False
+        else: 
+            pos += 1
+    return True
+    
+def getFloat(prompt="Enter a float: ",
+            error ="Error, invalid input - Try again (#.##) "):
+    num = raw_input(prompt)
+    while not isvFloat(num):
+        print error
+        num = raw_input(prompt)
+    return float(num)
+
+print getFloat()
