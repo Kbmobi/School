@@ -1,0 +1,18 @@
+
+public class Riding {
+
+	public Riding(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void addCandidate(Candidate candidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void voteFor(Candidate fakeFred) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

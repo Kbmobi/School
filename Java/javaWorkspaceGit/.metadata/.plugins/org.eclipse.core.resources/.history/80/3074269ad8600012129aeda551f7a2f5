@@ -1,0 +1,33 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class MotorsDriver {
+
+	public static void main(String[] args) {
+		Motor aMotor = new Motor("AA", 100);
+
+		Motor secondMotor = new Motor("BB", 30);
+		secondMotor.addHours(35);
+
+		List<Motor> allMotors = new ArrayList<Motor>();
+
+		allMotors.add(aMotor);
+		allMotors.add(secondMotor);
+
+		aMotor = null;
+
+		for (Motor someMotor : allMotors) {
+			if (someMotor.isPastTimeForService() == true) {
+				System.out.println(someMotor.getSerialNumber());
+			}
+		}
+
+		int numberOfItems = allMotors.size();
+		System.out.println("Size of list in " + numberOfItems);
+
+		for (int i = 0; i < allMotors.size(); i++) {
+			Motor firstMotor = allMotors.get(i);
+			System.out.println(firstMotor);
+		}
+	}
+}

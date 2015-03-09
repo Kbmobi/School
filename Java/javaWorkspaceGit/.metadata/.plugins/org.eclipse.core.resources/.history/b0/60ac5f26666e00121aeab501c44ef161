@@ -1,0 +1,74 @@
+
+public class HockeyPlayer implements Comparable<HockeyPlayer>{
+	private String firstName;
+	private String lastName;
+	
+	private int goals;
+	private int assists;
+	
+	public HockeyPlayer(String inFirst, String inLast) {
+		firstName = inFirst;
+		lastName = inLast;
+		
+		goals = 0;
+		assists = 0;
+	}
+	
+	public int getGoals() {
+		return goals;
+	}
+	
+	public int getAssists() {
+		return assists;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName(){
+		return lastName;
+	}
+	
+	public void addGoal() {
+		goals++;
+	}
+	
+	public void addAssist() {
+		assists++;
+	}
+	
+	public int getTotalPoints() {
+		return goals + assists;
+	}
+	
+	@Override
+	public boolean equals(Object what) {
+		HockeyPlayer other = (HockeyPlayer) what;
+		
+		if( ! lastName.equals(other.lastName)) {
+			return false;
+		}
+		
+		if( ! firstName.equals(other.firstName)) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public int compareTo(HockeyPlayer other) {
+		int myTotalPoints = getTotalPoints();
+		int otherTotalPoints = other.getTotalPoints();
+		
+		int difference = myTotalPoints - otherTotalPoints;
+		if(difference != 0) {
+			return difference;
+		}
+		
+		difference = lastName.compareTo(other.lastName);
+		
+		return difference;
+	}
+}

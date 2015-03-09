@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class DarrellPod implements MusicPlayer {
+	
+	private List<Song> allSongs;
+	private Song currentSong;
+	private int currentSongPosition;
+	
+	public DarrellPod() {
+		allSongs = new ArrayList<Song>();
+		currentSong = new Song("No current song", "No current Song", 0);
+		currentSongPosition = -1;
+	}
+
+	@Override
+	public void addSong(Song someSong) {
+		allSongs.add(someSong);
+		
+	}
+
+	@Override
+	public void playNextSong() {
+		currentSongPosition++;
+		currentSong = allSongs.get(currentSongPosition);
+	}
+
+	@Override
+	public void playPreviousSong() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int size() {
+		int numberOfItems = allSongs.size();
+		return numberOfItems;
+	}
+
+	@Override
+	public Song getSong(int position) {
+		Song aSong = allSongs.get(position);
+		return aSong;
+	}
+
+	@Override
+	public Song getCurrentSong() {
+
+		return currentSong;
+	}
+
+}

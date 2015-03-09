@@ -1,0 +1,20 @@
+
+public class MusicGUI {
+
+	private DarrellPod thePod;
+	
+	public static void main(String[] arg) {
+		new MusicGUI();
+	}
+	
+	public MusicGUI() {
+		Song firstSong = new Song("aa", "aa", 10);
+		Song secondSong = new Song("bb", "bb", 20);
+		
+		myPod.addSong(firstSong);
+		myPod.addSong(secondSong);
+	
+		JFrame mainFrame = new JFrame();
+		
+	}
+}

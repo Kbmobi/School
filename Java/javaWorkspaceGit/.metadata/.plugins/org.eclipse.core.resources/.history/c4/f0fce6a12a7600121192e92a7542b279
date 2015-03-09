@@ -1,0 +1,29 @@
+
+public class Candidate {
+	private String firstName;
+	private String lastName;
+	private int voteCount;
+
+	public Candidate(String inFirstName, String inLastName) {
+		inFirstName = firstName;
+		inLastName = lastName;
+		voteCount = 0;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getVoteCount() {
+		return voteCount;
+	}
+
+	public void addVote() {
+		voteCount++;
+	}
+
+}

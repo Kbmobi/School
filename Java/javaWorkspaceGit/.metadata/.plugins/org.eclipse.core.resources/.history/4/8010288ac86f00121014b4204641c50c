@@ -1,0 +1,46 @@
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+public class MusicGUI {
+
+	private DarrellPod myPod;
+	
+	public static void main(String[] arg) {
+		new MusicGUI();
+	}
+	
+	public MusicGUI() {
+		myPod = new DarrellPod();
+		
+		Song firstSong = new Song("aa", "aa", 10);
+		Song secondSong = new Song("bb", "bb", 20);
+		
+		myPod.addSong(firstSong);
+		myPod.addSong(secondSong);
+	
+		JFrame mainFrame = new JFrame();
+		mainFrame.setSize(400, 300);
+		mainFrame.setLocationRelativeTo(mainFrame);
+		
+		JButton startButton = new JButton("Comedy Button");
+		
+		mainFrame.add(startButton);
+		
+		mainFrame.setVisible(true);
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

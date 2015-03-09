@@ -1,0 +1,44 @@
+
+public class HockeyPlayer {
+	private String firstName;
+	private String lastName;
+	
+	private int goals;
+	private int assists;
+	
+	public HockeyPlayer(String inFirst, String inLast){
+		firstName = inFirst;
+		lastName = inLast;
+		
+		goals = 0;
+		assists = 0;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public int getGoals() {
+		return goals;
+	}
+	
+	public int getAssists() {
+		return assists;
+	}
+	
+	public int getTotalPoints() {
+		return goals + assists;
+	}
+
+	public void addGoal(int newGoal) {
+		goals += newGoal;		
+	}
+	
+	public void addAssists(int newAssist) {
+		assists += newAssist;
+	}
+}

@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class Emcee implements EmceeInterface   {
+	private List<Thrower> allThrowers;
+	private List<Instructor> allInstructors;
+	
+	public Emcee() {
+
+		allThrowers = new ArrayList<Thrower>();
+		allInstructors = new ArrayList<Instructor>();
+	}
+	
+	@Override
+	public Iterator<Instructor> iterator() {
+		return allInstructors.iterator();
+	}
+
+	@Override
+	public ThrowerInterface getCurrentThrower() {
+		return null;
+	}
+
+	@Override
+	public InstructorInterface getCurrentVictim() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void throwerStepsUp(ThrowerInterface nextThrower) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void throwerChoosesVictim(Instructor victim) {
+
+	}
+
+	@Override
+	public boolean throwAnother(int fundsPayed) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void dunked() {
+		
+	}
+
+	@Override
+	public int getTotalFundsRaised() {
+		// TODO Auto-generated method stub
+		return 0;
+		
+	}
+}

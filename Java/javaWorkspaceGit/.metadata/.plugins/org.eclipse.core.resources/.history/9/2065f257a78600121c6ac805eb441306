@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class HenryHowardHolmes {
+
+	public static void main(String[] args) {
+		List<Directory> allClients = new ArrayList<>();
+
+		allClients.add(new Directory("Fred", "Flintstone", 5, 2));
+		allClients.add(new Directory("Barney", "Rubble", 3, 30));
+		allClients.add(new Directory("Wilma", "Flintstone", 1, 2));
+
+	}
+
+}

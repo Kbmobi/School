@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class Riding implements RidingInterface {
+	private String location;
+	private List<CandidateInterface> allCandidate;
+	
+	public Riding(String i) {
+		location = i;
+		allCandidate = new ArrayList<CandidateInterface>();
+	}
+
+	@Override
+	public Iterator<CandidateInterface> iterator() {
+		Collections.sort(allCandidate);
+
+		return allCandidate.iterator();
+	}
+
+	@Override
+	public String getName() {
+		return location;
+	}
+
+	@Override
+	public void addCandidate(CandidateInterface who) {
+		allCandidate.add(who);
+		
+	}
+
+	@Override
+	public void voteFor(CandidateInterface fakeWho) {
+		int thatGuy = allCandidate.indexOf(fakeWho);
+		allCandidate.get(thatGuy).addVote();
+		}
+
+	@Override
+	public CandidateInterface getWinner() {
+		return Collections.max(allCandidate);
+	}
+
+	public Iterator<CandidateInterface> byLastName() {
+		Collections.sort(allCandidate);
+
+		return allCandidate.iterator();
+	}
+
+}

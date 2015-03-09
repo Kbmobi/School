@@ -1,0 +1,28 @@
+import static org.junit.Assert.*;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+
+public class motorTest {
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@Test
+	public void initialized() {
+		motor aMotor = new motor("XX1", 100);
+		
+		String serial = aMotor.getSerialNumber();
+		assertTrue(serial.equals("XX1"));
+		
+		int maximumHours = aMotor.getMaximumHoursBeforeService();
+		assertTrue(maximumHours == 100);
+		
+		int currentHours = aMotor.getCurrentHours();
+		assertTrue(currentHours == 0);
+		
+	}
+
+}

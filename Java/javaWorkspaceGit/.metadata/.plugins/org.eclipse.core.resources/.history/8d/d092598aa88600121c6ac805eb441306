@@ -1,0 +1,135 @@
+import java.io.Serializable;
+
+public class Directory implements Comparable<Directory>, Serializable {
+	private String firstName;
+	private String lastName;
+	private int ammountOfDaysToStay;
+	private int ammountOfMoneyInPocket;
+	private boolean evictionTime;
+
+	public Directory(String inFirstName, String inLastName, int inDays,
+			int inMoney) {
+		firstName = inFirstName;
+		lastName = inLastName;
+		ammountOfDaysToStay = inDays;
+		ammountOfMoneyInPocket = inMoney;
+		evictionTime = false;
+	}
+
+	public Directory() {
+	}
+
+	public void setFirstName(String inFirstName) {
+		firstName = inFirstName;
+	}
+
+	public void setLastName(String inLastName) {
+		lastName = inLastName;
+	}
+
+	public void setDaysToStay(int inDays) {
+
+		ammountOfDaysToStay = inDays;
+	}
+
+	public void setMoneyInPocket(int inMoney) {
+		if (inMoney < 0) {
+			return;
+		}
+
+		ammountOfMoneyInPocket = inMoney;
+	}
+	
+	public void setEvictionTime(int inDays, int inMoney){
+		int total = inDays + inMoney;
+		
+		if(total < 0) {
+			murderVictim();
+		}
+		
+		evictionTime = false;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getDaysToStay() {
+		return ammountOfDaysToStay;
+	}
+
+	public int getMoneyInPocket() {
+		return ammountOfMoneyInPocket;
+	}
+	
+	public void nightlyBilling(Directory victim) {
+		int days = victim.getDaysToStay();
+		int gold = victim.getMoneyInPocket();
+		int total = days + gold;
+		int fee = 1;
+		
+		if(total < 0){
+			murderVictim();
+			return;
+		}
+		
+		victim.setDaysToStay(days - fee);
+		victim.setMoneyInPocket(gold - fee);
+	}
+	
+	public void murderVictim(){
+		evictionTime = true;
+	}
+
+	@Override
+	public int compareTo(Directory other) {
+		int myTotalMoney = getMoneyInPocket();
+		int otherTotalMoney = other.getMoneyInPocket();
+
+		int difference = myTotalMoney - otherTotalMoney;
+		if (difference != 0) {
+			return difference;
+		}
+
+		difference = ammountOfDaysToStay - other.ammountOfDaysToStay;
+		if (difference != 0) {
+			return difference;
+		}
+
+		difference = lastName.compareTo(other.lastName);
+
+		return difference;
+	}
+
+	@Override
+	public boolean equals(Object what) {
+		Directory other = (Directory) what;
+
+		if (!lastName.equals(other.lastName)) {
+			return false;
+		}
+
+		if (!firstName.equals(other.firstName)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		String result = "";
+
+		result += "firstName " + firstName;
+		result += " lastName " + lastName;
+		result += " ammountOfDaysToStay " + ammountOfDaysToStay;
+		result += " ammountOfMoneyInPocket " + ammountOfMoneyInPocket;
+		result += " evictionTime " + evictionTime;
+		
+		return result;
+	}
+}

@@ -1,0 +1,12 @@
+
+public class motor {
+	private String serialNumber;
+	private int maximumHoursBeforeService;
+	private int currentHours;
+	
+	public motor(String inSerial, int maximumHours){
+		serialNumber = inSerial;
+		maximumHoursBeforeService = maximumHours;
+		currentHours = 0;
+	}
+}

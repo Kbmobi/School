@@ -1,0 +1,86 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class LoserDriver {
+
+	public static void main(String[] args) {
+		Loser fred = new Loser("Fred", 150);
+		Loser jones = new Loser("Jones", 175);
+		Loser evilMonkey = new Loser("EvilMonkey", 102);
+		Loser rockMonster = new Loser("TheRockMonster", 6000);
+		
+		List<Loser> losers = new ArrayList<Loser>();
+
+		losers.add(fred);	
+		losers.add(jones);
+		losers.add(evilMonkey);
+		losers.add(rockMonster);
+		
+		fred = null;
+		jones = null;
+		evilMonkey = null;
+		rockMonster = null;
+		
+		for (Loser who : losers) {
+			who.lowerWeight();
+			who.lowerWeight();
+		}	
+		
+		for (Loser who : losers) {
+			System.out.println(who.getName());
+		}
+		
+		
+		Loser fetchBitch = new Loser("Fred", 150);
+		int foundPosition = losers.indexOf(fetchBitch);
+		Loser foundPlayer = losers.get(foundPosition);
+//		System.out.println(foundPlayer.toString());		
+		foundPlayer.setCurrentWeight(123);
+//		System.out.println(foundPlayer.toString());
+		foundPlayer = null;
+		
+		
+		
+		fetchBitch = new Loser("Jones", 175);
+		foundPosition = losers.indexOf(fetchBitch);
+		foundPlayer = losers.get(foundPosition);
+//		System.out.println(foundPlayer.toString());		
+		foundPlayer.setCurrentWeight(170);
+//		System.out.println(foundPlayer.toString());		
+		foundPlayer = null;
+		
+		
+		System.out.println("Biggest Loser is: " + Collections.max(losers));
+		
+		Collections.sort(losers);
+		
+		for (Loser who : losers) {
+			System.out.println(who.getName());
+		}
+
+//Find the smallest loser. Use a counted loop to go through the list of losers. Remove them from the list, then print out their information.
+//Note that ArrayList's remove has two different versions. In one version you give the position of the item you with to remove. In the other version, 
+//you can pass the actual loser as an argument, which will use the Loser's equals method to find the correct item to remove from the list. When printing,
+//use the getters for the loser rather than a toString.
+		
+		List<Loser> copy = new ArrayList<Loser>();
+		for (Loser who : losers) {
+			copy.add(who);
+		}
+		
+//		for (Loser who : copy) {
+//			System.out.println(who.getName());
+//		}
+		
+		for(int i = 0; i < losers.size(); i++) {
+			System.out.println(copy.get(i));
+			losers.remove(losers.get(i));
+			System.out.println(copy.get(i));
+		}
+		
+		}
+	}
+

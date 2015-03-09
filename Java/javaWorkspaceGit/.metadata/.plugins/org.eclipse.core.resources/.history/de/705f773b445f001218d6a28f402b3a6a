@@ -1,0 +1,58 @@
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+
+public class BicycleTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void madeCorrectly() {
+		Bicycle myBike = new Bicycle(21);
+		
+		int gears = myBike.getMaximumGears();
+		assertTrue(gears == 21);
+		
+		int speed = myBike.getSpeed();
+		assertTrue(speed == 0);
+		
+		int currentGear = myBike.getCurrentGear();
+		assertTrue(currentGear == 1);
+		
+		String ownerName = myBike.getOwnerName();
+		assertTrue(ownerName.equals(""));
+	}
+	
+	@Test
+	public void pedalOnce() {
+		Bicycle myBike = new Bicycle(21);
+		
+		int oldSpeed = myBike.getSpeed();
+		
+		myBike.pedal();
+		
+		int currentSpeed = myBike.getSpeed();
+		assertTrue(currentSpeed > oldSpeed);		
+	}
+	
+	@Test
+	public void gearUp() {
+		Bicycle myBike = new Bicycle(3);
+		
+		assertTrue(myBike.getCurrentGear() == 1);
+
+		myBike.gearUp();
+		assertTrue(myBike.getCurrentGear() == 2);
+
+		myBike.gearUp();
+		assertTrue(myBike.getCurrentGear() == 3);
+		
+		myBike.gearUp();
+		assertTrue(myBike.getCurrentGear() == 3);
+	}
+
+}

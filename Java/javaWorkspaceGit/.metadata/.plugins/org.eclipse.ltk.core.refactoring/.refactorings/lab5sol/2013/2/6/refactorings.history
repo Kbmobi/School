@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;allVoters&apos; in &apos;Riding&apos; to &apos;allCandidate&apos;&#x0D;&#x0A;- Original project: &apos;lab5sol&apos;&#x0D;&#x0A;- Original element: &apos;Riding.allVoters&apos;&#x0D;&#x0A;- Renamed element: &apos;Riding.allCandidate&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;allVoters&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;{Riding.java[Riding^allVoters" name="allCandidate" references="true" setter="false" stamp="1360105992467" textual="false" version="1.0"/>
+</session>

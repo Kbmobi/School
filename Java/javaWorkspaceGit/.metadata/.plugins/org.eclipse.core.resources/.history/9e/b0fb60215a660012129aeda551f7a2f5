@@ -1,0 +1,12 @@
+import java.util.List;
+
+
+public class Team {
+	private String teamName;
+	private List<HockeyPlayer> roster;
+	
+	public Team(String inTeamName) {
+		teamName = inTreamName;
+		roster = new Arraylist<HockeyPlayer>();
+	}
+}

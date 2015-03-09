@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
+public class HockeyDriver {
+
+	public static void main(String[] args) {
+		HockeyPlayer kesler = new HockeyPlayer("Ryan", "Kesler");
+		
+		kesler.addGoal(3);
+		kesler.addAssists(3);
+		
+		HockeyPlayer daniel = new HockeyPlayer("Daniel", "Sedin");
+		
+		daniel.addGoal(3);
+		
+		HockeyPlayer henrick = new HockeyPlayer("Henrick", "Desin");
+		
+		henrick.addAssists(4);
+		henrick.addGoal(3);
+		
+		List<HockeyPlayer> canucks = new ArrayList<HockeyPlayer>();
+		
+		canucks.add(kesler);
+		canucks.add(daniel);
+		canucks.add(henrick);
+		
+		kesler = null;
+		daniel = null;
+		henrick = null;
+		
+		HockeyPlayer childLabor = new HockeyPlayer("Daniel", "Sedin");
+		
+		int foundPosition = canucks.indexOf(childLabor);
+		HockeyPlayer foundPlayer = canucks.get(foundPosition);
+		
+		foundPlayer.addGoal(1);
+		
+		foundPlayer = null;
+		
+		Collections.sort(canucks);
+		Collections.reverse(canucks);
+		
+		for(HockeyPlayer who : canucks){
+			System.out.println(who.getFirstName() + " " + who.getLastName() + " " + who.getTotalPoints());
+		}
+	}
+
+}

@@ -1,0 +1,52 @@
+
+public class Bicycle {
+	private int maximumGears;
+	private int speed;
+	private int currentGear;
+	private String ownerName;
+	
+	public Bicycle(int inMaxGears) {
+		maximumGears = inMaxGears;
+		speed = 0;
+		currentGear = 1;
+		ownerName = "";
+	}
+	
+	public void setOwnerName(String newName) {
+		ownerName = newName;
+	}
+	
+	public String getOwnerName() {
+		return ownerName;
+	}
+	
+	public int getMaximumGears() {
+		return maximumGears;
+	}
+	
+	public void pedal() {
+		speed++;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void brake() {
+		speed--;
+	}
+	
+	public int getCurrentGear() {
+		return currentGear;
+	}
+	
+	public void gearUp() {
+		if(currentGear < maximumGears) {
+			currentGear++;
+		}
+	}
+	
+	public void gearDown() {
+		currentGear--;
+	}
+}

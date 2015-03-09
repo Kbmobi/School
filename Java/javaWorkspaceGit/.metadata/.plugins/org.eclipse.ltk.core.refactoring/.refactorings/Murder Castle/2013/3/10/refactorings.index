@@ -1,0 +1,8 @@
+1362641199496	Rename type 'HenryHowardHolmes'
+1362678616565	Delete element
+1362784848635	Extract local variable 'iterator'
+1362784854961	Extract local variable 'copyOfClients2'
+1362793236366	Rename field 'ammountOfMoneyInPocket'
+1362797735434	Delete element
+1362798462175	Rename method 'getMoneyInPocket'
+1362799773732	Convert local variable 'scan' to field

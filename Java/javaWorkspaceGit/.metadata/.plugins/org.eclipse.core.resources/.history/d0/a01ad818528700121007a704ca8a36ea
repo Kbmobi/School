@@ -1,0 +1,111 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class DirectoryDriver {
+
+	public static void main(String[] args) {
+		List<Directory> allClients = new ArrayList<>();
+
+		allClients.add(new Directory("Fred", "Flintstone", 5, 2));
+		allClients.add(new Directory("Wilma", "Flintstone", 5, 3));
+		allClients.add(new Directory("Pebbles", "Flintstone", 3, 5));
+		allClients.add(new Directory("Dino", "Flintstone", 0, 0));
+		allClients.add(new Directory("Baby", "Puss", 0, 0));
+		allClients.add(new Directory("Barney", "Rubble", 3, 5));
+		allClients.add(new Directory("Betty", "Rubble", 3, 5));
+		allClients.add(new Directory("Bamm-Bamm", "Rubble", 0, 0));
+		allClients.add(new Directory("Hoppy", "Rubble", 0, 0));
+		allClients.add(new Directory("Mr", "Slate", 0, 0));
+		allClients.add(new Directory("Joe", "Rockhead", 0, 0));
+		allClients.add(new Directory("Pearl", "Slaghoople", 0, 0));
+		allClients.add(new Directory("Great", "Gazoo", 0, 0));
+		allClients.add(new Directory("Tex", "Hardock", 0, 0));
+		allClients.add(new Directory("Sam", "SlagHeap", 0, 0));
+		
+		String fileName = "myDirectory.txt";
+
+		Path file = Paths.get(fileName);
+
+		writeAllClientsToFile(file, allClients);
+
+		List<Directory> copyOfClients = readAllClientsFromFile(file);
+
+		System.out.println(copyOfClients.toString());
+//		for (Directory who : copyOfClients) {
+//			System.out.println(who.getFirstName() + " " + who.getLastName()
+//					+ " " + who.getDaysToStay() + " " + who.getMoneyInPocket());
+//		}
+
+	}
+	
+	private static void writeAllClientsToFile(Path file,
+			List<Directory> allClients) {
+		Charset charset = Charset.forName("US-ASCII");
+
+		try (BufferedWriter writer = Files.newBufferedWriter(file, charset)) {
+
+			for (Directory who : allClients) {
+				writeOneClient(who, writer);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	private static void writeOneClient(Directory who, BufferedWriter writer)
+			throws IOException {
+		String first = who.getFirstName();
+		String last = who.getLastName();
+		String days = who.getDaysToStay() + "";
+		String money = who.getMoneyInPocket() + "";
+
+		int daysToStay = who.getDaysToStay();
+		Integer currentDays = new Integer(daysToStay);
+		days = currentDays.toString();
+
+		int gold = who.getMoneyInPocket();
+		Integer currentGold = new Integer(gold);
+		money = currentGold.toString();	
+		
+		String result = first + " " + last + " " + days + " " + money;
+
+		writer.write(result);
+		writer.newLine();
+	}
+	
+	private static List<Directory> readAllClientsFromFile(Path file) {
+		List<Directory> bunchOClients = new ArrayList<>();
+
+		Charset charset = Charset.forName("US-ASCII");
+
+		try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+
+			String aLine = "";
+			while ((aLine = reader.readLine()) != null) {
+				System.out.println(aLine);
+				Scanner scan = new Scanner(aLine);
+
+				String firstName = scan.next();
+				String lastName = scan.next();
+				int days = scan.nextInt();
+				int money = scan.nextInt();
+
+				Directory aClient = new Directory(firstName, lastName, days, money);
+				bunchOClients.add(aClient);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return bunchOClients;
+	}
+}
